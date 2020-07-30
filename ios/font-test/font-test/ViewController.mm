@@ -31,7 +31,9 @@
 
 
 static std::vector<CGFloat> fontWeightConfig = {
-    -1.00, -0.70, -0.50, -0.23, -0.00, 0.20, 0.30, 0.40, 0.60, 0.80, 1.00
+//    -1.00, -0.70, -0.50, -0.23, -0.00, 0.20, 0.30, 0.40, 0.60, 0.80, 1.00
+    -1.00, UIFontWeightThin, UIFontWeightUltraLight, UIFontWeightLight, UIFontWeightRegular,
+    UIFontWeightMedium, UIFontWeightSemibold, UIFontWeightBold, UIFontWeightHeavy, UIFontWeightBlack, 1.00
 };
 
 - (void)viewDidLoad {
@@ -65,8 +67,9 @@ static std::vector<CGFloat> fontWeightConfig = {
 
         UIFontDescriptor* fontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:@{
             UIFontDescriptorSizeAttribute:@(size),
-            UIFontDescriptorFamilyAttribute: @"Arial",
-        //    UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+       //     UIFontDescriptorFamilyAttribute: @"Arial",//
+            UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+      //      UIFontDescriptorFamilyAttribute: @".AppleSystemUIFont",
             UIFontDescriptorTraitsAttribute: @{
                 UIFontWeightTrait: @(fontWeigth),
           //      UIFontSymbolicTrait: @(symbolic),
