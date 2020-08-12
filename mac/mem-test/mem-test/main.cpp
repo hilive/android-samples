@@ -7,67 +7,48 @@
 //
 
 #include <iostream>
-#include <time.h>
-#include <sys/time.h>
+#include <benchmark/benchmark.h>
 
-uint64_t GetUsTickCount() {
-    struct timeval now;
-    gettimeofday(&now, NULL);
-    return (uint64_t)now.tv_sec * 1000000 + now.tv_usec;
+const uint32_t kBuffSize = 720 * 1280 * 4;
+const uint32_t kTestTimes = 10000;
+
+void bm_malloc_test(benchmark::State& state) {
+    auto size = state.range(0);
+    for (auto _ : state) {
+        uint8_t* data = (uint8_t*)malloc(size);
+        free(data);
+    }
 }
 
+BENCHMARK(bm_malloc_test)->Iterations(kTestTimes)->Arg(kBuffSize);
 
-int main(int argc, const char * argv[]) {
-    const uint32_t kBuffSize = 720 * 1280 * 4;
-    const uint32_t kTestTimes = 10000;
-
-    {
-        uint64_t start_stamp = GetUsTickCount();
-        
-        uint32_t i = 0;
-        while (i ++ < kTestTimes) {
-            uint8_t* data = (uint8_t*)malloc(kBuffSize);
-            free(data);
-        }
-        
-        uint64_t spent = GetUsTickCount() - start_stamp;
-
-        printf("%d spent: %llu avg: %llu\n", __LINE__, spent, spent / kTestTimes);
+void bm_memset_test(benchmark::State& state) {
+    auto size = state.range(0);
+    for (auto _ : state) {
+        uint8_t* data = (uint8_t*)malloc(size);
+        memset(data, 0, size);
+        free(data);
     }
-
-    {
-        uint64_t start_stamp = GetUsTickCount();
-        
-        uint32_t i = 0;
-        while (i ++ < kTestTimes) {
-            uint8_t* data = (uint8_t*)malloc(kBuffSize);
-            memset(data, 0, kBuffSize);
-            free(data);
-        }
-        
-        uint64_t spent = GetUsTickCount() - start_stamp;
-
-        printf("%d spent: %llu avg: %llu\n", __LINE__, spent, spent / kTestTimes);
-    }
-
-    {
-        uint8_t* src = (uint8_t*)malloc(kBuffSize);
-
-        uint64_t start_stamp = GetUsTickCount();
-        
-        uint32_t i = 0;
-        while (i ++ < kTestTimes) {
-            uint8_t* data = (uint8_t*)malloc(kBuffSize);
-            memcpy(data, src, kBuffSize);
-            free(data);
-        }
-        
-        uint64_t spent = GetUsTickCount() - start_stamp;
-        
-        free(src);
-
-        printf("%d spent: %llu avg: %llu\n", __LINE__, spent, spent / kTestTimes);
-    }
-    
-    return 0;
 }
+
+BENCHMARK(bm_memset_test)->Iterations(kTestTimes)->Arg(kBuffSize);
+
+
+void bm_memcpy_test(benchmark::State& state) {
+    uint8_t* src = (uint8_t*)malloc(kBuffSize);
+
+    auto size = state.range(0);
+    for (auto _ : state) {
+        uint8_t* data = (uint8_t*)malloc(size);
+        memcpy(data, src, kBuffSize);
+        free(data);
+    }
+
+    free(src);
+}
+
+BENCHMARK(bm_memcpy_test)->Iterations(kTestTimes)->Arg(kBuffSize);
+
+
+BENCHMARK_MAIN();
+

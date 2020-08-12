@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		57E01F8B24E3B884005EADC4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57E01F8A24E3B884005EADC4 /* main.cpp */; };
+		57E01F9424E3C2F2005EADC4 /* libbenchmark_main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E01F9224E3C2F2005EADC4 /* libbenchmark_main.a */; };
+		57E01F9524E3C2F2005EADC4 /* libbenchmark.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E01F9324E3C2F2005EADC4 /* libbenchmark.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		57E01F8724E3B884005EADC4 /* mem-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mem-test"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57E01F8A24E3B884005EADC4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		57E01F9224E3C2F2005EADC4 /* libbenchmark_main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbenchmark_main.a; path = benchmark/libs/libbenchmark_main.a; sourceTree = "<group>"; };
+		57E01F9324E3C2F2005EADC4 /* libbenchmark.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbenchmark.a; path = benchmark/libs/libbenchmark.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57E01F9424E3C2F2005EADC4 /* libbenchmark_main.a in Frameworks */,
+				57E01F9524E3C2F2005EADC4 /* libbenchmark.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +49,7 @@
 			children = (
 				57E01F8924E3B884005EADC4 /* mem-test */,
 				57E01F8824E3B884005EADC4 /* Products */,
+				57E01F9124E3C2F2005EADC4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +67,15 @@
 				57E01F8A24E3B884005EADC4 /* main.cpp */,
 			);
 			path = "mem-test";
+			sourceTree = "<group>";
+		};
+		57E01F9124E3C2F2005EADC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57E01F9224E3C2F2005EADC4 /* libbenchmark_main.a */,
+				57E01F9324E3C2F2005EADC4 /* libbenchmark.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +257,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823M6R4A85;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/benchmark/include";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/benchmark/libs",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -251,6 +272,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823M6R4A85;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/benchmark/include";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/benchmark/libs",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
