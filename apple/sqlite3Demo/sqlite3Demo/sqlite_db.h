@@ -16,7 +16,12 @@
 namespace hilive {
 namespace media {
 
-struct DbObject {
+class SqliteDB;
+
+class DbObject {
+    friend class SqliteDB;
+    
+public:
     enum DbType {
         kDbTypeUnknow,
         kDbTypeInt,
@@ -24,12 +29,27 @@ struct DbObject {
         kDbTypeString,
     };
     
-    DbType          type = kDbTypeUnknow;
-    std::string     name;
+    DbObject() {}
+    ~DbObject() {}
     
-    int             int_val = 0;
-    float           float_val = 0;
-    std::string     str_val;
+public:
+    const DbType get_type() { return type_; }
+    const std::string& get_name() { return name_; }
+    const int32_t get_i32() { return (int32_t)u64_val_; }
+    const int64_t get_i64() { return (int64_t)u64_val_; }
+    const uint32_t get_u32() { return (uint32_t)u64_val_; }
+    const uint64_t get_u64() { return u64_val_; }
+    const float get_flt() { return (float)dbl_val_; }
+    const double get_dbl() { return (double)dbl_val_; }
+    const std::string& get_str() { return str_val_;}
+    
+private:
+    DbType          type_ = kDbTypeUnknow;
+    std::string     name_;
+    
+    uint64_t        u64_val_ = 0;
+    double          dbl_val_ = 0;
+    std::string     str_val_;
 };
 
 struct DbObjectResult {
@@ -42,8 +62,11 @@ struct DbStringResult {
 
 class SqliteDB {
 public:
-    SqliteDB();
+    static std::unique_ptr<SqliteDB> Create();
     ~SqliteDB();
+    
+private:
+    SqliteDB();
     
 public:
     bool Init(const char* db_name);

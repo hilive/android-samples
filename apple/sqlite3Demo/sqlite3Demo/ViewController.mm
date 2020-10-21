@@ -16,17 +16,20 @@ using namespace hilive::media;
 @end
 
 @implementation ViewController {
-    sqlite3 *_db;    // 句柄
-    SqliteDB db;
+    std::unique_ptr<SqliteDB> db1;
+    std::unique_ptr<SqliteDB> db2;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    db1 = SqliteDB::Create();
+    db2 = SqliteDB::Create();
+
     // Do any additional setup after loading the view, typically from a nib.
     // 1.打开数据库
     [self openSqlDataBase];
     // 2.插入数据
-//    [self insertData];
+    [self insertData];
     // 3.查询数据
     [self sqlData];
 }
@@ -40,50 +43,29 @@ using namespace hilive::media;
     NSString *fileName = [docPath stringByAppendingPathComponent:@"student.db"];
     NSLog(@"fileNamePath = %@",fileName);
     // 将 OC 字符串转换为 C 语言的字符串
-    const char *cFileName = fileName.UTF8String;
-    
-    db.Init(cFileName);
-    
-    // 打开数据库文件(如果数据库文件不存在,那么该函数会自动创建数据库文件)
-    int result = sqlite3_open(cFileName, &_db);
-    
-    if (result != SQLITE_OK) {  // 打开失败
-        NSLog(@"打开数据库失败");
-        return;
-    }
-    NSLog(@"打开数据库成功");
-    
+
+    db1->Init([fileName UTF8String]);
+    db2->Init([fileName UTF8String]);
+
+  //  db1.Query("DROP TABLE t_students;");
     // 创建表
-    const char *sql = "CREATE TABLE IF NOT EXISTS t_students (id integer PRIMARY KEY AUTOINCREMENT,name text NOT NULL,age integer NOT NULL);";
-    char *errMsg = NULL;
-    
-    result = sqlite3_exec(_db, sql, NULL, NULL, &errMsg);
-    if (result == SQLITE_OK) {
-        NSLog(@"创建表成功");
-    } else {
-        NSLog(@"创建表失败");
-        printf("创表失败---%s----%s---%d",errMsg,__FILE__,__LINE__);
-    }
+    const char *sql = "CREATE TABLE IF NOT EXISTS t_students (id integer PRIMARY KEY AUTOINCREMENT,name text NOT NULL unique,age integer NOT NULL);";
+    db1->Query(sql);
+    db1->Query(sql);
 }
 
 // 插入数据
 - (void)insertData {
     for (int i = 0; i < 5; i++) {
-        NSString *name = [NSString stringWithFormat:@"韩雪--%d",arc4random_uniform(100)];
+        NSString *name = [NSString stringWithFormat:@"韩雪%d", i];
         int age = arc4random_uniform(20) + 10;
-        
+
         // 拼接 sql 语句
-        NSString *sql = [NSString stringWithFormat:@"INSERT INTO t_students (name,age) VALUES ('%@',%d);",name,age];
-        
-        // 执行 sql 语句
-        char *errMsg = NULL;
-        int result = sqlite3_exec(_db, sql.UTF8String, NULL, NULL, &errMsg);
-        
-        if (result == SQLITE_OK) {
-            NSLog(@"插入数据成功 - %@",name);
-        } else {
-            NSLog(@"插入数据失败 - %s",errMsg);
-        }
+        NSString *sql = [NSString stringWithFormat:@"replace INTO t_students (name,age) VALUES ('%@',%d);", name, age];
+
+        std::deque<DbObjectResult> ret;
+        db1->Query([sql UTF8String], ret);
+        db2->Query([sql UTF8String], ret);
     }
 }
 
@@ -93,32 +75,18 @@ using namespace hilive::media;
     //const char* sql="SELECT id,name,age FROM t_students WHERE age<20;";
     const char* sql="SELECT id,name,age FROM t_students;";
 
+    std::deque<DbObjectResult> ret1;
+    db1->Query(sql, ret1);
+    for (auto& obj : ret1) {
+        printf("%s:%lld %s:%s %s:%lld \n",
+               obj.values[0].get_name().c_str(), obj.values[0].get_i64(), obj.values[1].get_name().c_str(), obj.values[1].get_str().c_str(), obj.values[2].get_name().c_str(), obj.values[2].get_i64());
+    }
 
-  //  db1.Exec("delete from t_students");
-    db.Query(sql);
-
-    std::deque<DbObjectResult> obj_results;
-    db.Query(sql, obj_results);
-    std::deque<DbStringResult> str_results;
-    db.Query(sql, str_results);
-    [self insertData];
-    
-    sqlite3_stmt *stmt = NULL;
-    
-    // 进行查询前的准备工作
-    if (sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL) == SQLITE_OK) {   // sql语句没有问题
-        NSLog(@"sql语句没有问题");
-        
-        // 每调用一次sqlite3_step函数，stmt就会指向下一条记录
-        while (sqlite3_step(stmt) == SQLITE_ROW) {  // 找到一条记录
-            // 取出数据
-            int ID = sqlite3_column_int(stmt, 0);   // 取出第0列字段的值
-            const unsigned char *name = sqlite3_column_text(stmt, 1);   // 取出第1列字段的值
-            int age = sqlite3_column_int(stmt, 2);  // 取出第2列字段的值
-            printf("%d %s %d\n",ID,name,age);
-        }
-    } else {
-        NSLog(@"查询语句有问题");
+    std::deque<DbObjectResult> ret2;
+    db2->Query(sql, ret2);
+    for (auto& obj : ret2) {
+        printf("%s:%lld %s:%s %s:%lld \n",
+               obj.values[0].get_name().c_str(), obj.values[0].get_i64(), obj.values[1].get_name().c_str(), obj.values[1].get_str().c_str(), obj.values[2].get_name().c_str(), obj.values[2].get_i64());
     }
 }
 

@@ -11,6 +11,10 @@
 namespace hilive {
 namespace media {
 
+std::unique_ptr<SqliteDB> SqliteDB::Create() {
+    return std::unique_ptr<SqliteDB>(new SqliteDB());
+}
+
 SqliteDB::SqliteDB() : inited_(false), db_(nullptr) {
 }
 
@@ -67,7 +71,8 @@ bool SqliteDB::Query(const char* sql, std::deque<DbObjectResult>& results) {
             break;
         }
         
-        if ((ret = sqlite3_prepare_v2(db_, sql, -1, &stmt, NULL)) != SQLITE_OK) {
+        const char* err_msg = nullptr;
+        if ((ret = sqlite3_prepare_v2(db_, sql, -1, &stmt, &err_msg)) != SQLITE_OK) {
             break;
         }
         
@@ -87,21 +92,21 @@ bool SqliteDB::Query(const char* sql, std::deque<DbObjectResult>& results) {
                 const int type = sqlite3_column_type(stmt, i);
                 
                 DbObject& object = result.values[i];
-                object.name.assign(name ? name : "");
+                object.name_.assign(name ? name : "");
                 
                 switch (type) {
                     case SQLITE_INTEGER: {
-                        object.type = DbObject::kDbTypeInt;
-                        object.int_val = sqlite3_column_int(stmt, i);
+                        object.type_ = DbObject::kDbTypeInt;
+                        object.u64_val_ = sqlite3_column_int64(stmt, i);
                     } break;
                     case SQLITE_FLOAT: {
-                        object.type = DbObject::kDbTypeFloat;
-                        object.float_val = sqlite3_column_double(stmt, i);
+                        object.type_ = DbObject::kDbTypeFloat;
+                        object.dbl_val_ = sqlite3_column_double(stmt, i);
                     } break;
                     case SQLITE_TEXT: {
                         const char* val = (const char*)sqlite3_column_text(stmt, i);
-                        object.type = DbObject::kDbTypeString;
-                        object.str_val.assign(val ? val : "");
+                        object.type_ = DbObject::kDbTypeString;
+                        object.str_val_.assign(val ? val : "");
                     } break;
                     default:break;
                 }
@@ -128,14 +133,15 @@ bool SqliteDB::Query(const char* sql, std::deque<DbStringResult>& results) {
             break;
         }
         
-        if ((ret = sqlite3_prepare_v2(db_, sql, -1, &stmt, NULL)) != SQLITE_OK) {
+        const char* prepare_err_msg = nullptr;
+        if ((ret = sqlite3_prepare_v2(db_, sql, -1, &stmt, &prepare_err_msg)) != SQLITE_OK) {
             break;
         }
         
+        char* get_err_msg = nullptr;
         int rows = 0;
         int columns = 0;
-        char* err_msg = nullptr;
-        if ((ret = sqlite3_get_table(db_, sql, &table_result, &rows, &columns, &err_msg)) != SQLITE_OK) {
+        if ((ret = sqlite3_get_table(db_, sql, &table_result, &rows, &columns, &get_err_msg)) != SQLITE_OK) {
             break;
         }
         
@@ -143,15 +149,15 @@ bool SqliteDB::Query(const char* sql, std::deque<DbStringResult>& results) {
             for (int i = 0; i < rows; ++ i) {
                 DbStringResult result;
                 result.values.resize(columns);
-
+                
                 for (int j = 0; j < columns; ++ j) {
                     DbObject& object = result.values[j];
-
+                    
                     const char* name = table_result[j];
-                    const char* value = table_result[i + j + columns];
-                    object.type = DbObject::kDbTypeString;
-                    object.name.assign(name ? name : "");
-                    object.str_val.assign(value ? value : "");
+                    const char* value = table_result[(i + 1) * columns + j];
+                    object.type_ = DbObject::kDbTypeString;
+                    object.name_.assign(name ? name : "");
+                    object.str_val_.assign(value ? value : "");
                 }
                 
                 results.push_back(result);
