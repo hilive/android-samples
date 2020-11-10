@@ -1,0 +1,49 @@
+
+<html>
+    <head>
+        <meta http-equiv = "Content-Type" content = "text/html; charset=utf8">
+            <title>WKWebView</title>
+            <script language = "javascript">
+                console.log('ok##############')
+                //! 加载URL
+                function loadURL(url) {
+                    window.location.href = url;
+                }
+            
+            //! JS调用OC入口
+            function jsToOc(action, params) {
+                var url = "jsToOc://" + action + "?" + params;
+                console.log(url)
+                loadURL(url);
+            }
+            
+            //! JS登录成功后loadURL并传参token
+            function loginSucceed(token) {
+                var action = "loginSucceed";
+                window.webkit.messageHandlers.jsToOc.postMessage(action, token);
+            }
+            
+            //! JS调用OC的登录功能
+            function login() {
+                var token = "js_tokenString";
+                loginSucceed(token);
+            }
+            
+            //! OC调用JS入口
+            function ocToJs(action, params) {
+                return document.getElementById("returnValue").innerHTML = action + '?' + params;
+            }
+            
+                </script>
+            </head>
+    
+    <body>
+        <h3>功能按钮</h3>
+        <button onclick = "login()" style = "font-size: 18px;">登录</button>
+        
+        <h3>回调数据</h3>
+        <div id = "returnValue" style = "font-size: 18px; border: 1px dotted; height: 50px;"> </div>
+    </body>
+    
+</html>
+
