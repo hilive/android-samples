@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            mWrapper = ProcessProxyWrapper.Stub.asInterface(service);
-            ProcessProxyWrapper.Stub.asInterface(service);
+            mWrapper = ProcessProxy.Stub.asInterface(service);
 
             Log.i(TAG, "onServiceConnected clsName: " + name.getClassName() + " pkgName: " + name.getPackageName());
             Log.i(TAG, "onServiceConnected " + android.os.Process.myPid());
