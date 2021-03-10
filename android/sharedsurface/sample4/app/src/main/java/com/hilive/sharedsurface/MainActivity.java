@@ -15,6 +15,7 @@ import android.media.MediaFormat;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -27,17 +28,30 @@ import android.widget.Switch;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener {
     private static final String TAG = "hilog.MainActivity";
     private ProcessProxy mWrapper = null;
     private VideoEncoder mVideoEncoder = new VideoEncoder();
     private DrawSurface mDrawSurface = new DrawSurface();
+    private Timer mTimer = new Timer();
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mWrapper = ProcessProxy.Stub.asInterface(service);
+
+            mTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        String msg = "sendMessage from main process " + android.os.Process.myPid();
+                        mWrapper.sendMessage(100, msg);
+                    } catch (RemoteException e) {}
+                }
+            }, 0, 1000);
 
             Log.i(TAG, "onServiceConnected clsName: " + name.getClassName() + " pkgName: " + name.getPackageName());
             Log.i(TAG, "onServiceConnected " + android.os.Process.myPid());

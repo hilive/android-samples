@@ -16,26 +16,31 @@ public class ProcessProxyWrapper extends ProcessProxy.Stub {
     private DrawSurface mDrawSurface = new DrawSurface();
 
     @Override
-    public void onSurfaceTextureAvailable(Surface surface, int width, int height) {
+    public void onSurfaceTextureAvailable(Surface surface, int width, int height) throws RemoteException {
         Log.i(TAG, "onSurfaceTextureAvailable: pid: " + android.os.Process.myPid());
 
         mDrawSurface.init(surface, width, height);
     }
 
     @Override
-    public void onSurfaceTextureSizeChanged(Surface surface, int width, int height) {
+    public void onSurfaceTextureSizeChanged(Surface surface, int width, int height) throws RemoteException {
         Log.i(TAG, "onSurfaceTextureSizeChanged: pid: " + android.os.Process.myPid());
     }
 
     @Override
-    public void onSurfaceTextureUpdated(Surface surface) {
+    public void onSurfaceTextureUpdated(Surface surface) throws RemoteException {
         Log.i(TAG, "onSurfaceTextureUpdated: pid: " + android.os.Process.myPid());
     }
 
     @Override
-    public boolean onSurfaceTextureDestroyed(Surface surface) {
+    public boolean onSurfaceTextureDestroyed(Surface surface) throws RemoteException {
         Log.i(TAG, "onSurfaceTextureDestroyed: pid: " + android.os.Process.myPid());
         return true;
+    }
+
+    @Override
+    public void sendMessage(int evtType, String evtMsg) throws RemoteException {
+        Log.i(TAG, "onMessage: type: [" + evtType + "] msg: [" + evtMsg + "] pid: [" + android.os.Process.myPid() + "]");
     }
 
     @Override
