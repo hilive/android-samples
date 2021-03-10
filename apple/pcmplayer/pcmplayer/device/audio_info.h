@@ -31,14 +31,16 @@ enum MediaFormat {
     kMediaFormatVideoPixelEnd,
     
     kMediaFormatAudioBegin = 100,
-    kMediaFormatAudioS16 = 101,//signed 16 bits
-    kMediaFormatAudioS32 = 102,//signed 32 bits
-    kMediaFormatAudioFlt = 103,//float
-    kMediaFormatAudioDbl = 104,//double
-    kMediaFormatAudioS16p = 105,//signed 16 bits, planar
-    kMediaFormatAudioS32p = 106,//signed 32 bits, planar
-    kMediaFormatAudioFltp = 107,//float, planar
-    kMediaFormatAudioDblp = 108,//double, planar
+    kMediaFormatAudioS8,//signed 8 bits
+    kMediaFormatAudioS16,//signed 16 bits
+    kMediaFormatAudioS32,//signed 32 bits
+    kMediaFormatAudioFlt,//float
+    kMediaFormatAudioDbl,//double
+    kMediaFormatAudioS8p,//signed 8 bits, planar
+    kMediaFormatAudioS16p,//signed 16 bits, planar
+    kMediaFormatAudioS32p,//signed 32 bits, planar
+    kMediaFormatAudioFltp,//float, planar
+    kMediaFormatAudioDblp,//double, planar
     kMediaFormatAudioEnd,
 };
 

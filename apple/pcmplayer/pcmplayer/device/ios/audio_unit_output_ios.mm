@@ -93,7 +93,10 @@ bool AudioUnitOutputIos::Init(const AudioOutputSources& input_sources, const Aud
         stream_output_desc.mFramesPerPacket = 1;
         stream_output_desc.mSampleRate = output_source.samplerate;
         stream_output_desc.mChannelsPerFrame = output_source.channel;
-        if (output_source.format == kMediaFormatAudioS16) {
+        if (output_source.format == kMediaFormatAudioS8) {
+            stream_output_desc.mBitsPerChannel = 8;
+            stream_output_desc.mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+        } else if (output_source.format == kMediaFormatAudioS16) {
             stream_output_desc.mBitsPerChannel = 16;
             stream_output_desc.mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
         } else {

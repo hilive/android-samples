@@ -12,8 +12,8 @@
 using namespace hilive::media;
 
 int g_channels = 1;
-int g_samplerate = 20000;
-MediaFormat g_media_format = kMediaFormatAudioS16;
+int g_samplerate = 16000;
+MediaFormat g_media_format = kMediaFormatAudioS8;
 
 class AudioOutputCallbackerIos : public AudioOutputCallbacker {
  public:
@@ -43,7 +43,7 @@ class AudioOutputCallbackerIos : public AudioOutputCallbacker {
     uint8_t* ptr = (uint8_t*)data;
     printf("bytes:");
     for (int i = 0; i < cnt && i < 6; ++ i) {
-        printf(" %d", ptr[i]);
+        printf(" %d", data[i]);
     }
     printf("\r\n");
 
