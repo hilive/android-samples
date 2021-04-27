@@ -90,7 +90,7 @@
                       options:NSKeyValueObservingOptionNew
                       context:nil];
 
-   // NSURL* url = [NSURL URLWithString:@"https://webaudioapi.com/samples/"];
+    NSURL* url = [NSURL URLWithString:@"https://www.baidu.com"];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [self.webView loadRequest:request];
 }
