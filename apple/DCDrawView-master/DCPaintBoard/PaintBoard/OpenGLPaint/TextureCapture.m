@@ -33,6 +33,7 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
 @interface WAEJTextureCapture()
 @property (nonatomic, readonly) EAGLContext* context;
 @property (nonatomic, assign) GLuint frameBuffer;
+@property (nonatomic, assign) GLuint renderBuffer;
 @property (nonatomic, assign) GLuint vao;
 @property (nonatomic, assign) GLuint vbo;
 @property (nonatomic, assign) GLuint ebo;
@@ -53,6 +54,8 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
 
 @synthesize ready;
 @synthesize textureId;
+@synthesize width;
+@synthesize height;
 
 - (id)initWithContext:(EAGLContext*)context {
   if (self = [super init]) {
@@ -74,6 +77,7 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
     }
     
     glGenFramebuffers(1, &_frameBuffer);
+    glGenRenderbuffers(1, &_renderBuffer);
     
     GLuint vertexShader = [self compileShader:CaptureVertexShader withType:GL_VERTEX_SHADER];
     GLuint fragmentShader = [self compileShader:CaptureFragmentsShader withType:GL_FRAGMENT_SHADER];
@@ -162,9 +166,13 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   [EAGLContext setCurrentContext:_context];
   
   if (_frameBuffer) {
-    glDeleteRenderbuffers(1, &_frameBuffer);
+    glDeleteFramebuffers(1, &_frameBuffer);
   }
   
+  if (_renderBuffer) {
+    glDeleteRenderbuffers(1, &_renderBuffer);
+  }
+
   if (_vao) {
     glDeleteVertexArraysOES(1, &_vao);
   }
@@ -252,8 +260,11 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   if (errCode != kCVReturnSuccess) {
     return NO;
   }
-  
+
   textureId = CVOpenGLESTextureGetName(textureRef);
+
+  GLint currActiveTexture = 0;
+  glGetIntegerv(GL_ACTIVE_TEXTURE, &currActiveTexture);
 
   GLint currTextureId = 0;
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &currTextureId);
@@ -265,6 +276,7 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
+  glActiveTexture(currActiveTexture);
   glBindTexture(GL_TEXTURE_2D, currTextureId);
   
   bf_width = width;
@@ -273,18 +285,37 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   return YES;
 }
 
+- (BOOL)resize:(CAEAGLLayer*)layer {
+  EAGLContext* currentContext = EAGLContext.currentContext;
+  [EAGLContext setCurrentContext:_context];
+  glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
+  [self.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
+
+  glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &width);
+  glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &height);
+
+  [EAGLContext setCurrentContext:currentContext];
+
+  [self resize:width height:height];
+  return YES;
+}
+
 - (BOOL)present {
   if (!ready) {
     return NO;
   }
 
-  GLenum glError = glGetError();
-  GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-
   glFlush();
+
+  static uint32_t times = 0;
+  times ++;
+  if (times > 100 && times % 60 == 0) {
+    UIImage* img = [UIImage imageWithCIImage:[[CIImage alloc] initWithCVPixelBuffer:self.pixelBuffer]];
+    img = nil;
+  }
   
-  GLint currProgram = 0;
-  glGetIntegerv(GL_CURRENT_PROGRAM, &currProgram);
+  GLint currActiveTexture = 0;
+  glGetIntegerv( GL_ACTIVE_TEXTURE, &currActiveTexture);
   
   GLint currTextureId = 0;
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &currTextureId);
@@ -295,6 +326,9 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   GLint currRenderBuffer = 0;
   glGetIntegerv(GL_RENDERBUFFER_BINDING, &currRenderBuffer);
 
+  GLint currProgram = 0;
+  glGetIntegerv(GL_CURRENT_PROGRAM, &currProgram);
+
   GLint currArrayBuffer = 0;
   glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &currArrayBuffer);
 
@@ -304,14 +338,20 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   GLint currVertexArray = 0;
   glGetIntegerv(GL_VERTEX_ARRAY_BINDING_OES, &currVertexArray);
   
+  GLint currViewPort[4] = {0};
+  glGetIntegerv(GL_VIEWPORT, currViewPort);
+
+  EAGLContext* currentContext = EAGLContext.currentContext;
+  [EAGLContext setCurrentContext:_context];
+
   glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
-  glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, currRenderBuffer);
-  
-  glClear(GL_COLOR_BUFFER_BIT);
-  
+  glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
+  glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderBuffer);
+
+  glViewport(0, 0, bf_width, bf_height);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
   glUseProgram(_gl_program);
-  
-  glError = glGetError();
   
   glUniform1i(_gl_uniform_texture, 0);
 
@@ -323,19 +363,22 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   glBindTexture(GL_TEXTURE_2D, textureId);
   
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-  glError = glGetError();
   
   [self.context presentRenderbuffer:GL_RENDERBUFFER];
-  glError = glGetError();
-  
-  glBindTexture(GL_TEXTURE_2D, currTextureId);
+
+  [EAGLContext setCurrentContext:currentContext];
+
   glBindFramebuffer(GL_FRAMEBUFFER, currFrameBuffer);
+  
+  glActiveTexture(currActiveTexture);
+  glBindTexture(GL_TEXTURE_2D, currTextureId);
+  
+  glUseProgram(currProgram);
   glBindBuffer(GL_ARRAY_BUFFER, currArrayBuffer);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currElementArrayBuffer);
   glBindVertexArrayOES(currVertexArray);
-  glUseProgram(currProgram);
 
-  glError = glGetError();
+  glViewport(currViewPort[0], currViewPort[1], currViewPort[2], currViewPort[3]);
   
   return YES;
 }
