@@ -17,16 +17,18 @@ CAPTURE_SHADER_SOURCE(CaptureVertexShader,
   gl_Position=vec4(position,1.0);
   v_texcoord=texcoord;
 }
-                      );
+);
 
 CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
                       precision highp float;
                       varying highp vec2 v_texcoord;
                       uniform sampler2D texSampler;
                       void main() {
+ // vec2 flip = vec2(v_texcoord.x, 1.0-v_texcoord.y);
+//  gl_FragColor=texture2D(texSampler,flip);
   gl_FragColor=texture2D(texSampler,v_texcoord);
 }
-                      );
+);
 
 @interface WAEJTextureCapture()
 @property (nonatomic, readonly) EAGLContext* context;
@@ -103,6 +105,7 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
     glGenBuffers(1, &_ebo);
     
     // Set up vertex data (and buffer(s)) and attribute pointers
+
     GLfloat vertices[] = {
       // Positions    // Texture Coords
       -1.0f,  -1.0f, 0.0f, 0.0f, 0.0f, // Bottom Left
@@ -299,13 +302,13 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   [self.context presentRenderbuffer:GL_RENDERBUFFER];
   glError = glGetError();
   
-//  glBindTexture(GL_TEXTURE_2D, currTextureId);
-//  glBindTexture(GL_TEXTURE_CUBE_MAP, currCubeMap);
+  glBindTexture(GL_TEXTURE_2D, currTextureId);
+  glBindTexture(GL_TEXTURE_CUBE_MAP, currCubeMap);
   glBindFramebuffer(GL_FRAMEBUFFER, currFrameBuffer);
-//  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currElementArrayBuffer);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currElementArrayBuffer);
   glBindBuffer(GL_ARRAY_BUFFER, currArrayBuffer);
-//  glBindVertexArrayOES(currVertexArray);
-//  glUseProgram(currProgram);
+  glBindVertexArrayOES(currVertexArray);
+  glUseProgram(currProgram);
   
   glError = glGetError();
   GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
