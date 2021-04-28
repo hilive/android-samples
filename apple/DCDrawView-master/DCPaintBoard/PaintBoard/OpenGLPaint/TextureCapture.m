@@ -36,10 +36,10 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
 @property (nonatomic, assign) GLuint vao;
 @property (nonatomic, assign) GLuint vbo;
 @property (nonatomic, assign) GLuint ebo;
-@property (nonatomic, assign) GLuint glProgram;
-@property (nonatomic, assign) GLuint glPosition;
-@property (nonatomic, assign) GLuint glTextureCoords;
-@property (nonatomic, assign) GLuint glUniformTexture;
+@property (nonatomic, assign) GLuint gl_program;
+@property (nonatomic, assign) GLuint gl_position;
+@property (nonatomic, assign) GLuint gl_texture_coords;
+@property (nonatomic, assign) GLuint gl_uniform_texture;
 @end
 
 @implementation WAEJTextureCapture {
@@ -78,28 +78,38 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
     GLuint vertexShader = [self compileShader:CaptureVertexShader withType:GL_VERTEX_SHADER];
     GLuint fragmentShader = [self compileShader:CaptureFragmentsShader withType:GL_FRAGMENT_SHADER];
     
-    _glProgram = glCreateProgram();
-    glAttachShader(_glProgram, vertexShader);
-    glAttachShader(_glProgram, fragmentShader);
-    glLinkProgram(_glProgram);
+    _gl_program = glCreateProgram();
+    glAttachShader(_gl_program, vertexShader);
+    glAttachShader(_gl_program, fragmentShader);
+    glLinkProgram(_gl_program);
     
     GLint linkSuccess;
-    glGetProgramiv(_glProgram, GL_LINK_STATUS, &linkSuccess);
+    glGetProgramiv(_gl_program, GL_LINK_STATUS, &linkSuccess);
     if (linkSuccess == GL_FALSE) {
       GLchar message[256] = {0};
-      glGetProgramInfoLog(_glProgram, sizeof(message), 0, &message[0]);
+      glGetProgramInfoLog(_gl_program, sizeof(message), 0, &message[0]);
       NSString* messageStr = [NSString stringWithUTF8String:message];
       NSLog(@"%@", messageStr);
       break;
     }
-    
-    glUseProgram(_glProgram);
-    _glPosition = glGetAttribLocation(_glProgram, "position");
-    
-    _glTextureCoords = glGetAttribLocation(_glProgram, "texcoord");
-    
-    _glUniformTexture = glGetUniformLocation(_glProgram, "texSampler");
-    
+
+    GLint curVAO = 0;
+    glGetIntegerv(GL_VERTEX_ARRAY_BINDING_OES, &curVAO);
+
+    GLint curVBO = 0;
+    glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &curVBO);
+
+    GLint curEBO = 0;
+    glGetIntegerv(GL_ELEMENT_ARRAY_BUFFER_BINDING, &curEBO);
+
+    GLint curProgram = 0;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &curProgram);
+
+    glUseProgram(_gl_program);
+    _gl_position = glGetAttribLocation(_gl_program, "position");
+    _gl_texture_coords = glGetAttribLocation(_gl_program, "texcoord");
+    _gl_uniform_texture = glGetUniformLocation(_gl_program, "texSampler");
+
     glGenVertexArraysOES(1, &_vao);
     glGenBuffers(1, &_vbo);
     glGenBuffers(1, &_ebo);
@@ -113,7 +123,7 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
       1.0f, 1.0f, 0.0f, 1.0f, 1.0f, // Top Right
       -1.0f,  1.0f, 0.0f, 0.0f, 1.0f  // Top Left
     };
-    
+
     glBindVertexArrayOES(_vao);
     
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -122,16 +132,19 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
     const GLushort indices[] = { 0, 1, 2, 2, 3, 0 };
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    
+
     // Position attribute
-    glEnableVertexAttribArray(_glPosition);
-    glVertexAttribPointer(_glPosition, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
-    
+    glEnableVertexAttribArray(_gl_position);
+    glVertexAttribPointer(_gl_position, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+
     // TexCoord attribute
-    glEnableVertexAttribArray(_glTextureCoords);
-    glVertexAttribPointer(_glTextureCoords, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-    
-    glBindVertexArrayOES(0);
+    glEnableVertexAttribArray(_gl_texture_coords);
+    glVertexAttribPointer(_gl_texture_coords, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+
+    glBindVertexArrayOES(curVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, curVBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, curEBO);
+    glUseProgram(curProgram);
     
     available = YES;
   } while (false);
@@ -164,8 +177,8 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
     glDeleteBuffers(1, &_ebo);
   }
   
-  if (_glProgram) {
-    glDeleteProgram(_glProgram);
+  if (_gl_program) {
+    glDeleteProgram(_gl_program);
   }
   
   if (textureRef) {
@@ -231,13 +244,18 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   }
   
   textureId = CVOpenGLESTextureGetName(textureRef);
+
+  GLint currTextureId = 0;
+  glGetIntegerv(GL_TEXTURE_BINDING_2D, &currTextureId);
+
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textureId);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  glBindTexture(GL_TEXTURE_2D, 0);
+
+  glBindTexture(GL_TEXTURE_2D, currTextureId);
   
   bf_width = width;
   bf_height = height;
@@ -249,7 +267,10 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   if (!ready) {
     return NO;
   }
-  
+
+  GLenum glError = glGetError();
+  GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+
   glFlush();
   
   GLint currProgram;
@@ -257,9 +278,6 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   
   GLint currTextureId;
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &currTextureId);
-  
-  GLint currCubeMap;
-  glGetIntegerv(GL_TEXTURE_BINDING_CUBE_MAP, &currCubeMap);
   
   GLint currFrameBuffer;
   glGetIntegerv(GL_FRAMEBUFFER_BINDING, &currFrameBuffer);
@@ -270,9 +288,6 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   GLint currElementArrayBuffer;
   glGetIntegerv(GL_ELEMENT_ARRAY_BUFFER_BINDING, &currElementArrayBuffer);
   
-  GLint currArrayBuffer;
-  glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &currArrayBuffer);
-  
   GLint currVertexArray;
   glGetIntegerv(GL_VERTEX_ARRAY_BINDING_OES, &currVertexArray);
   
@@ -281,37 +296,33 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   
   glClear(GL_COLOR_BUFFER_BIT);
   
-  GLenum glError = glGetError();
   glViewport(0, 0, bf_width, bf_height);
   
-  glUseProgram(_glProgram);
+  glUseProgram(_gl_program);
   
   glError = glGetError();
   
-  glUniform1i(_glUniformTexture, 0);
-  
+  glUniform1i(_gl_uniform_texture, 0);
+
   glBindVertexArrayOES(_vao);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
   
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, textureId);
   
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-  
-  glBindVertexArrayOES(0);
+  glError = glGetError();
   
   [self.context presentRenderbuffer:GL_RENDERBUFFER];
   glError = glGetError();
   
   glBindTexture(GL_TEXTURE_2D, currTextureId);
-  glBindTexture(GL_TEXTURE_CUBE_MAP, currCubeMap);
   glBindFramebuffer(GL_FRAMEBUFFER, currFrameBuffer);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currElementArrayBuffer);
-  glBindBuffer(GL_ARRAY_BUFFER, currArrayBuffer);
   glBindVertexArrayOES(currVertexArray);
   glUseProgram(currProgram);
-  
+
   glError = glGetError();
-  GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
   
   return YES;
 }
