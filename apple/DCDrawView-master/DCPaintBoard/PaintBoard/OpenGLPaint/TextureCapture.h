@@ -13,6 +13,7 @@
 @property (nonatomic, assign) BOOL ready;
 @property (nonatomic, assign) GLuint textureId;
 @property (nonatomic, readonly) CVPixelBufferRef pixelBuffer;
+@property (nonatomic, readonly) NSMutableData* nsData;
 - (id)initWithContext:(EAGLContext*)context;
 - (BOOL)resize:(uint32_t)width height:(uint32_t)height;
 - (BOOL)present;

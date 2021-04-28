@@ -198,6 +198,16 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   return pixel_buffer;
 }
 
+- (NSMutableData*) nsData {
+  NSMutableData* data = nil;
+  CVPixelBufferLockBaseAddress(pixel_buffer, 0);
+  void* addr = CVPixelBufferGetBaseAddress(pixel_buffer);
+  size_t size = CVPixelBufferGetDataSize(pixel_buffer);
+  data = [NSMutableData dataWithBytes:addr length:size];
+  CVPixelBufferUnlockBaseAddress(pixel_buffer, 0);
+  return data;
+}
+
 - (BOOL)resize:(uint32_t)width height:(uint32_t)height {
   if (!available) {
     return NO;
@@ -273,30 +283,31 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
 
   glFlush();
   
-  GLint currProgram;
+  GLint currProgram = 0;
   glGetIntegerv(GL_CURRENT_PROGRAM, &currProgram);
   
-  GLint currTextureId;
+  GLint currTextureId = 0;
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &currTextureId);
   
-  GLint currFrameBuffer;
+  GLint currFrameBuffer = 0;
   glGetIntegerv(GL_FRAMEBUFFER_BINDING, &currFrameBuffer);
   
-  GLint currRenderBuffer;
+  GLint currRenderBuffer = 0;
   glGetIntegerv(GL_RENDERBUFFER_BINDING, &currRenderBuffer);
-  
-  GLint currElementArrayBuffer;
+
+  GLint currArrayBuffer = 0;
+  glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &currArrayBuffer);
+
+  GLint currElementArrayBuffer = 0;
   glGetIntegerv(GL_ELEMENT_ARRAY_BUFFER_BINDING, &currElementArrayBuffer);
   
-  GLint currVertexArray;
+  GLint currVertexArray = 0;
   glGetIntegerv(GL_VERTEX_ARRAY_BINDING_OES, &currVertexArray);
   
   glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
   glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, currRenderBuffer);
   
   glClear(GL_COLOR_BUFFER_BIT);
-  
-  glViewport(0, 0, bf_width, bf_height);
   
   glUseProgram(_gl_program);
   
@@ -305,6 +316,7 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   glUniform1i(_gl_uniform_texture, 0);
 
   glBindVertexArrayOES(_vao);
+  glBindBuffer(GL_ARRAY_BUFFER, _vbo);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
   
   glActiveTexture(GL_TEXTURE0);
@@ -318,6 +330,7 @@ CAPTURE_SHADER_SOURCE(CaptureFragmentsShader,
   
   glBindTexture(GL_TEXTURE_2D, currTextureId);
   glBindFramebuffer(GL_FRAMEBUFFER, currFrameBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, currArrayBuffer);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, currElementArrayBuffer);
   glBindVertexArrayOES(currVertexArray);
   glUseProgram(currProgram);
