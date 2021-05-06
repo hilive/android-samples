@@ -286,9 +286,6 @@ SHADER_SOURCE(FlipFragmentsShader,
       break;
     }
     
-    glGenFramebuffers(1, &_frameBuffer);
-    glGenRenderbuffers(1, &_renderBuffer);
-    
     [_program1 destroy];
     if (![_program1 create:VertexShader fragmentsShader:PresentFragmentsShader]) {
       break;
@@ -486,15 +483,39 @@ SHADER_SOURCE(FlipFragmentsShader,
 }
 
 - (BOOL)resize:(CAEAGLLayer*)layer {
+  GLenum glStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+  GLenum glError = glGetError();
+
   StatusHolder* status = [[StatusHolder alloc] init];
   [status join];
   
   [EAGLContext setCurrentContext:_context];
+
+  if (_frameBuffer) {
+    glDeleteFramebuffers(1, &_frameBuffer);
+    _frameBuffer = 0;
+  }
+
+  if (_renderBuffer) {
+    glDeleteRenderbuffers(1, &_renderBuffer);
+    _renderBuffer = 0;
+  }
+
+  glGenFramebuffers(1, &_frameBuffer);
+  glGenRenderbuffers(1, &_renderBuffer);
+
   glBindFramebuffer(GL_FRAMEBUFFER, _frameBuffer);
   glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
+
+  glStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+  glError = glGetError();
+
   [self.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
   glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderBuffer);
-  
+
+  glStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+  glError = glGetError();
+
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &width);
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &height);
   
