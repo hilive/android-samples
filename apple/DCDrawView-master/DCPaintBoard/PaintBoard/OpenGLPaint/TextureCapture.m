@@ -408,7 +408,7 @@ SHADER_SOURCE(FlipFragmentsShader,
   }
   
   NSDictionary *pixelAttribs = @{ (id)kCVPixelBufferIOSurfacePropertiesKey: @{} };
-  CVReturn errCode = CVPixelBufferCreate(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef)pixelAttribs, &pixel_buffer);
+  CVReturn errCode = CVPixelBufferCreate(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, NULL, &pixel_buffer);
   if (errCode != kCVReturnSuccess) {
     return NO;
   }
@@ -422,20 +422,21 @@ SHADER_SOURCE(FlipFragmentsShader,
                                                          texture_cache,
                                                          pixel_buffer,
                                                          NULL,
-                                                         GL_TEXTURE_2D,
-                                                         GL_RGBA,
+                                                         GL_RENDERBUFFER,
+                                                         GL_RGBA8_OES,
                                                          width,
                                                          height,
                                                          GL_BGRA,
                                                          GL_UNSIGNED_BYTE,
                                                          0,
                                                          &pixel_texture);
+  GLenum glError = glGetError();
   if (errCode != kCVReturnSuccess) {
     return NO;
   }
   
   textureId = CVOpenGLESTextureGetName(pixel_texture);
-  
+  /*
   errCode = CVPixelBufferCreate(kCFAllocatorDefault, width, height, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef)pixelAttribs, &flip_pixel_buffer);
   if (errCode != kCVReturnSuccess) {
     return NO;
@@ -475,7 +476,7 @@ SHADER_SOURCE(FlipFragmentsShader,
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  
+  */
   bf_width = width;
   bf_height = height;
   ready = YES;
@@ -488,7 +489,12 @@ SHADER_SOURCE(FlipFragmentsShader,
 
   StatusHolder* status = [[StatusHolder alloc] init];
   [status join];
-  
+
+  glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &width);
+  glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &height);
+  [self resize:width height:height];
+
+  /*
   [EAGLContext setCurrentContext:_context];
 
   if (_frameBuffer) {
@@ -520,7 +526,7 @@ SHADER_SOURCE(FlipFragmentsShader,
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &height);
   
   [self resize:width height:height];
-  
+  */
   [status leave];
   return YES;
 }

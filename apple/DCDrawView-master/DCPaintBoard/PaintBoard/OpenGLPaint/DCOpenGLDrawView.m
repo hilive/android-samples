@@ -22,7 +22,7 @@
 #define kBrushOpacity		(1.0 / 3.0)
 #define kBrushPixelStep		3
 #define kBrushScale			2
-#define TMP_MODE
+//#define TMP_MODE
 
 // Shaders
 enum {
@@ -358,6 +358,8 @@ typedef struct {
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);
 #endif
+
+  [self.capture resize:(CAEAGLLayer*)self.layer];
   
   // For this sample, we do not need a depth buffer. If you do, this is how you can allocate depth buffer backing:
   //    glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
@@ -499,15 +501,15 @@ typedef struct {
   
 #ifdef TMP_MODE
   [_capture present];
+#else
+  [context presentRenderbuffer:GL_RENDERBUFFER];
+#endif
   static uint32_t times = 0;
   times ++;
   if (times > 100 && times % 60 == 0) {
     UIImage* img = [UIImage imageWithCIImage:[[CIImage alloc] initWithCVPixelBuffer:_capture.pixelBuffer]];
     img = nil;
   }
-#else
-  [context presentRenderbuffer:GL_RENDERBUFFER];
-#endif
 }
 
 
