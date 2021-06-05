@@ -231,7 +231,6 @@ typedef struct {
     [self clearDrawImageView];
     needsErase = NO;
   }
-  
 }
 
 
@@ -501,15 +500,15 @@ typedef struct {
   
 #ifdef TMP_MODE
   [_capture present];
-#else
-  [context presentRenderbuffer:GL_RENDERBUFFER];
-#endif
   static uint32_t times = 0;
   times ++;
   if (times > 100 && times % 60 == 0) {
     UIImage* img = [UIImage imageWithCIImage:[[CIImage alloc] initWithCVPixelBuffer:_capture.pixelBuffer]];
     img = nil;
   }
+#else
+  [context presentRenderbuffer:GL_RENDERBUFFER];
+#endif
 }
 
 

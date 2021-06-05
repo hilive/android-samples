@@ -25,24 +25,8 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVC-JD-C7a" userLabel="openGL" customClass="DCOpenGLDrawView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="826"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="openGL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEm-Yu-Q3E" userLabel="opengl">
-                                                <rect key="frame" x="0.0" y="20" width="60" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="RYW-M1-ibX"/>
-                                                    <constraint firstAttribute="height" constant="21" id="Y0X-oR-6bw"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="hEm-Yu-Q3E" firstAttribute="top" secondItem="BVC-JD-C7a" secondAttribute="top" constant="20" id="3jO-7r-Idj"/>
-                                            <constraint firstItem="hEm-Yu-Q3E" firstAttribute="leading" secondItem="BVC-JD-C7a" secondAttribute="leading" id="43F-yK-rB4"/>
-                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JM6-wr-XpH" userLabel="toolBar">
                                         <rect key="frame" x="0.0" y="826" width="414" height="70"/>
