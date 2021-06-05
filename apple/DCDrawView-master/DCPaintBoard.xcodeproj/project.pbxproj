@@ -80,7 +80,13 @@
 		1824B2571CCE71CF00EEB2C6 /* DCPaintBoard */ = {
 			isa = PBXGroup;
 			children = (
-				1824B26F1CCE71EC00EEB2C6 /* PaintBoard */,
+				18FCB85B1CD107D1008E90E4 /* 说明.h */,
+				57591C7E26342F89002A8236 /* TextureCapture.h */,
+				57591C7F26342F89002A8236 /* TextureCapture.m */,
+				18FCB8581CD10662008E90E4 /* GlDrawView.h */,
+				18FCB8591CD10662008E90E4 /* GlDrawView.m */,
+				18FCB85C1CD107D1008E90E4 /* Shaders */,
+				18FCB85F1CD107D1008E90E4 /* UtilSrc */,
 				1824B25B1CCE71CF00EEB2C6 /* AppDelegate.h */,
 				1824B25C1CCE71CF00EEB2C6 /* AppDelegate.m */,
 				1824B25E1CCE71CF00EEB2C6 /* ViewController.h */,
@@ -100,28 +106,6 @@
 				1824B2591CCE71CF00EEB2C6 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1824B26F1CCE71EC00EEB2C6 /* PaintBoard */ = {
-			isa = PBXGroup;
-			children = (
-				18FCB8571CD1064E008E90E4 /* OpenGLPaint */,
-			);
-			path = PaintBoard;
-			sourceTree = "<group>";
-		};
-		18FCB8571CD1064E008E90E4 /* OpenGLPaint */ = {
-			isa = PBXGroup;
-			children = (
-				18FCB85B1CD107D1008E90E4 /* 说明.h */,
-				57591C7E26342F89002A8236 /* TextureCapture.h */,
-				57591C7F26342F89002A8236 /* TextureCapture.m */,
-				18FCB8581CD10662008E90E4 /* GlDrawView.h */,
-				18FCB8591CD10662008E90E4 /* GlDrawView.m */,
-				18FCB85C1CD107D1008E90E4 /* Shaders */,
-				18FCB85F1CD107D1008E90E4 /* UtilSrc */,
-			);
-			path = OpenGLPaint;
 			sourceTree = "<group>";
 		};
 		18FCB85C1CD107D1008E90E4 /* Shaders */ = {
