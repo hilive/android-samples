@@ -8,20 +8,12 @@
 
 #import "ViewController.h"
 #import "DCCommon.h"
-#import "DCBezierPaintBoard.h"
-#import "DCUndoBeziPathPaintBoard.h"
 #import "DCOpenGLDrawView.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet DCOpenGLDrawView *openGlDrawView;
 
-@property (weak, nonatomic) IBOutlet DCUndoBeziPathPaintBoard *undoDrawView;
-
-@property (weak, nonatomic) IBOutlet DCBezierPaintBoard *beziPathDrawView;
-
 @property (weak, nonatomic) IBOutlet UIButton *selectColorBtn;
-@property (weak, nonatomic) IBOutlet UIButton *beziPathBtn;
-@property (weak, nonatomic) IBOutlet UIButton *undoBeziPath;
 @property (weak, nonatomic) IBOutlet UIButton *openGLBtn;
 @property (weak, nonatomic) IBOutlet UIView *colorView;
 @property (weak, nonatomic) IBOutlet UIButton *eraseBtn;
@@ -62,48 +54,16 @@
       break;
   }
   
-  self.beziPathDrawView.lineColor = self.paintColor;
-  self.undoDrawView.lineColor = self.paintColor;
   self.openGlDrawView.lineColor = self.paintColor;
 }
 
-- (void)setPaintBoardType:(DCPaintBoardType)paintBoardType
-{
+- (void)setPaintBoardType:(DCPaintBoardType)paintBoardType {
   _paintBoardType = paintBoardType;
-  switch (paintBoardType) {
-    case DCPaintBoardTypeBezi:{
-      self.beziPathDrawView.hidden = NO;
-      self.undoDrawView.hidden = YES;
-      self.openGlDrawView.hidden = YES;
-      break;
-    }
-    case DCPaintBoardTypeBeziUndo:{
-      self.beziPathDrawView.hidden = YES;
-      self.undoDrawView.hidden = NO;
-      self.openGlDrawView.hidden = YES;
-      break;
-    }
-    case DCPaintBoardTypeOpenGL:{
-      self.beziPathDrawView.hidden = YES;
-      self.undoDrawView.hidden = YES;
-      self.openGlDrawView.hidden = NO;
-      break;
-    }
-      
-    default:
-    {
-      self.beziPathDrawView.hidden = NO;
-      self.undoDrawView.hidden = YES;
-      self.openGlDrawView.hidden = YES;
-      break;
-    }
-  }
+  self.openGlDrawView.hidden = NO;
 }
 
 - (void)setIsErase:(BOOL)isErase{
   _isErase = isErase;
-  self.beziPathDrawView.isErase = isErase;
-  self.undoDrawView.isErase = isErase;
   self.openGlDrawView.isErase = isErase;
 }
 
@@ -116,16 +76,14 @@
 }
 
 - (void)longpresseraseBtn:(UILongPressGestureRecognizer *)gest{
-  [self.undoDrawView clear];
   [self.openGlDrawView clear];
-  [self.beziPathDrawView clear];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self selectPaintBoardBtnClcik:self.beziPathBtn];
+  [self selectPaintBoardBtnClcik:self.openGLBtn];
   [self selectColorBtnClick:_selectColorBtn];
   self.selectPaintColor = DCPaintColorBlack;
   
@@ -202,37 +160,7 @@
 - (IBAction)selectPaintBoardBtnClcik:(UIButton *)sender {
   if (!sender.selected) {
     self.paintBoardType = (DCPaintBoardType)sender.tag;
-    switch (sender.tag) {
-      case DCPaintBoardTypeBezi:
-      {
-        self.beziPathBtn.selected = YES;
-        self.undoBeziPath.selected = NO;
-        self.openGLBtn.selected = NO;
-        break;
-      }
-      case DCPaintBoardTypeBeziUndo:
-      {
-        self.beziPathBtn.selected = NO;
-        self.undoBeziPath.selected = YES;
-        self.openGLBtn.selected = NO;
-        break;
-      }
-      case DCPaintBoardTypeOpenGL:
-      {
-        self.beziPathBtn.selected = NO;
-        self.undoBeziPath.selected = NO;
-        self.openGLBtn.selected = YES;
-        break;
-      }
-        
-      default:
-      {
-        self.beziPathBtn.selected = YES;
-        self.undoBeziPath.selected = NO;
-        self.openGLBtn.selected = NO;
-        break;
-      }
-    }
+    self.openGLBtn.selected = YES;
   }
   
 }

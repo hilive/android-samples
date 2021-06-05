@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,46 +23,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-WX-bgl" userLabel="ContentView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zoo-tC-pwv" userLabel="beziPath" customClass="DCBezierPaintBoard">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="826"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beziPath" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iB5-e8-i27" userLabel="beziPath">
-                                                <rect key="frame" x="0.0" y="20" width="60" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="N7J-cf-p7I"/>
-                                                    <constraint firstAttribute="width" constant="60" id="e19-Jz-A7Y"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="iB5-e8-i27" firstAttribute="leading" secondItem="Zoo-tC-pwv" secondAttribute="leading" id="Psc-7B-Qp8"/>
-                                            <constraint firstItem="iB5-e8-i27" firstAttribute="top" secondItem="Zoo-tC-pwv" secondAttribute="top" constant="20" id="WNV-6g-6Q9"/>
-                                        </constraints>
-                                    </view>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKb-Qm-JQH" userLabel="undo" customClass="DCUndoBeziPathPaintBoard">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="826"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="undo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9o-cC-Nd4">
-                                                <rect key="frame" x="0.0" y="20" width="60" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="7db-y0-Pk5"/>
-                                                    <constraint firstAttribute="height" constant="21" id="cgf-UJ-Rfu"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="U9o-cC-Nd4" firstAttribute="leading" secondItem="TKb-Qm-JQH" secondAttribute="leading" id="q3n-ff-lAe"/>
-                                            <constraint firstItem="U9o-cC-Nd4" firstAttribute="top" secondItem="TKb-Qm-JQH" secondAttribute="top" constant="20" id="vDs-2l-ore"/>
-                                        </constraints>
-                                    </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVC-JD-C7a" userLabel="openGL" customClass="DCOpenGLDrawView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="826"/>
                                         <subviews>
@@ -97,33 +57,6 @@
                                                     <action selector="selectColorBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aSf-iK-WlI"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pif-ki-Iao">
-                                                <rect key="frame" x="0.0" y="0.0" width="80" height="70"/>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="7OQ-LV-icw"/>
-                                                </constraints>
-                                                <state key="normal" title="BezPath" backgroundImage="nomal">
-                                                    <color key="titleColor" systemColor="darkTextColor"/>
-                                                </state>
-                                                <state key="selected" backgroundImage="select"/>
-                                                <connections>
-                                                    <action selector="selectPaintBoardBtnClcik:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lMn-58-foo"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wHK-gL-0E9">
-                                                <rect key="frame" x="90" y="0.0" width="80" height="70"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="ZB5-tj-0op"/>
-                                                </constraints>
-                                                <state key="normal" title="Udo" backgroundImage="nomal">
-                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" backgroundImage="select"/>
-                                                <connections>
-                                                    <action selector="selectPaintBoardBtnClcik:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xoy-CL-AnK"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJh-uY-i2x" userLabel="Color">
                                                 <rect key="frame" x="244" y="0.0" width="80" height="70"/>
                                                 <constraints>
@@ -152,22 +85,16 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="G3j-kc-MG2" secondAttribute="bottom" id="04G-gg-X7G"/>
+                                            <constraint firstItem="WJJ-S5-cCE" firstAttribute="leading" secondItem="G3j-kc-MG2" secondAttribute="trailing" constant="74" id="0Kl-zf-0aE"/>
                                             <constraint firstAttribute="bottom" secondItem="WJJ-S5-cCE" secondAttribute="bottom" id="3eT-VT-zvz"/>
-                                            <constraint firstItem="wHK-gL-0E9" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="5gj-4V-7Kh"/>
                                             <constraint firstItem="WJJ-S5-cCE" firstAttribute="leading" secondItem="JM6-wr-XpH" secondAttribute="leading" id="Bed-yQ-5Af"/>
                                             <constraint firstAttribute="height" constant="70" id="CPO-Hm-FAY"/>
-                                            <constraint firstItem="pif-ki-Iao" firstAttribute="leading" secondItem="JM6-wr-XpH" secondAttribute="leading" id="E94-0o-Abj"/>
-                                            <constraint firstItem="pif-ki-Iao" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="Gv5-Be-BlB"/>
-                                            <constraint firstAttribute="bottom" secondItem="pif-ki-Iao" secondAttribute="bottom" id="Gvf-cR-ctT"/>
-                                            <constraint firstAttribute="bottom" secondItem="wHK-gL-0E9" secondAttribute="bottom" id="KC4-7p-H3g"/>
                                             <constraint firstItem="kJh-uY-i2x" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="Las-eX-2Ji"/>
-                                            <constraint firstItem="G3j-kc-MG2" firstAttribute="leading" secondItem="wHK-gL-0E9" secondAttribute="trailing" constant="10" id="NBs-wU-di4"/>
                                             <constraint firstItem="WJJ-S5-cCE" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="NW5-uR-zJe"/>
                                             <constraint firstAttribute="trailing" secondItem="WJJ-S5-cCE" secondAttribute="trailing" id="YiI-s0-CfW"/>
                                             <constraint firstItem="G3j-kc-MG2" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="biY-S3-sbN"/>
                                             <constraint firstAttribute="bottom" secondItem="kJh-uY-i2x" secondAttribute="bottom" id="lO9-rW-EmB"/>
                                             <constraint firstItem="WJJ-S5-cCE" firstAttribute="leading" secondItem="kJh-uY-i2x" secondAttribute="trailing" constant="10" id="v3H-ME-ho1"/>
-                                            <constraint firstItem="wHK-gL-0E9" firstAttribute="leading" secondItem="pif-ki-Iao" secondAttribute="trailing" constant="10" id="vG6-IE-eYg"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -245,24 +172,16 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
-                                    <constraint firstItem="BVC-JD-C7a" firstAttribute="height" secondItem="Zoo-tC-pwv" secondAttribute="height" id="1pE-rN-kxT"/>
-                                    <constraint firstItem="Zoo-tC-pwv" firstAttribute="top" secondItem="Cp7-WX-bgl" secondAttribute="top" id="60m-Yo-JOg"/>
+                                    <constraint firstItem="BVC-JD-C7a" firstAttribute="trailing" secondItem="bUT-nw-z0U" secondAttribute="trailing" id="BR1-lL-GR7"/>
                                     <constraint firstAttribute="trailing" secondItem="JM6-wr-XpH" secondAttribute="trailing" id="JF4-l0-qU2"/>
-                                    <constraint firstItem="TKb-Qm-JQH" firstAttribute="leading" secondItem="Cp7-WX-bgl" secondAttribute="leading" id="Jgo-1d-RRZ"/>
-                                    <constraint firstItem="Zoo-tC-pwv" firstAttribute="leading" secondItem="Cp7-WX-bgl" secondAttribute="leading" id="Krx-QF-YI9"/>
+                                    <constraint firstItem="BVC-JD-C7a" firstAttribute="bottom" secondItem="bUT-nw-z0U" secondAttribute="bottom" id="Jpd-mh-Ss2"/>
                                     <constraint firstAttribute="bottom" secondItem="JM6-wr-XpH" secondAttribute="bottom" id="M7i-Nm-zMw"/>
-                                    <constraint firstItem="TKb-Qm-JQH" firstAttribute="height" secondItem="Zoo-tC-pwv" secondAttribute="height" id="MSf-7t-8cU"/>
                                     <constraint firstItem="BVC-JD-C7a" firstAttribute="top" secondItem="Cp7-WX-bgl" secondAttribute="top" id="Mgn-m6-DEi"/>
-                                    <constraint firstItem="BVC-JD-C7a" firstAttribute="width" secondItem="Zoo-tC-pwv" secondAttribute="width" id="VdW-vV-LzK"/>
-                                    <constraint firstAttribute="trailing" secondItem="Zoo-tC-pwv" secondAttribute="trailing" id="Vvv-mg-Gqt"/>
-                                    <constraint firstItem="JM6-wr-XpH" firstAttribute="top" secondItem="Zoo-tC-pwv" secondAttribute="bottom" id="Y4m-BZ-lcZ"/>
                                     <constraint firstAttribute="trailing" secondItem="bUT-nw-z0U" secondAttribute="trailing" id="e2y-Ht-cjy"/>
                                     <constraint firstItem="JM6-wr-XpH" firstAttribute="leading" secondItem="Cp7-WX-bgl" secondAttribute="leading" id="kEE-an-USl"/>
-                                    <constraint firstItem="TKb-Qm-JQH" firstAttribute="top" secondItem="Cp7-WX-bgl" secondAttribute="top" id="kRd-pd-S91"/>
                                     <constraint firstItem="JM6-wr-XpH" firstAttribute="top" secondItem="bUT-nw-z0U" secondAttribute="bottom" id="lys-6y-pfL"/>
                                     <constraint firstItem="bUT-nw-z0U" firstAttribute="leading" secondItem="Cp7-WX-bgl" secondAttribute="leading" id="r1h-9I-Wrb"/>
                                     <constraint firstItem="BVC-JD-C7a" firstAttribute="leading" secondItem="Cp7-WX-bgl" secondAttribute="leading" id="s0A-72-jct"/>
-                                    <constraint firstItem="TKb-Qm-JQH" firstAttribute="width" secondItem="Zoo-tC-pwv" secondAttribute="width" id="vVF-ce-WTO"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -280,15 +199,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="beziPathBtn" destination="pif-ki-Iao" id="ZUC-M4-U8V"/>
-                        <outlet property="beziPathDrawView" destination="Zoo-tC-pwv" id="J3G-Zk-7kH"/>
                         <outlet property="colorView" destination="bUT-nw-z0U" id="weS-G4-UHk"/>
                         <outlet property="eraseBtn" destination="kJh-uY-i2x" id="6HW-jX-ZB6"/>
                         <outlet property="openGLBtn" destination="G3j-kc-MG2" id="qzB-7E-O4Q"/>
                         <outlet property="openGlDrawView" destination="BVC-JD-C7a" id="9is-88-iJA"/>
                         <outlet property="selectColorBtn" destination="WJJ-S5-cCE" id="PnH-7g-1Mi"/>
-                        <outlet property="undoBeziPath" destination="wHK-gL-0E9" id="dPe-oG-VoC"/>
-                        <outlet property="undoDrawView" destination="TKb-Qm-JQH" id="H4N-Qw-Lia"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -308,9 +223,6 @@
         <image name="nomal" width="150" height="86"/>
         <image name="red" width="28" height="28"/>
         <image name="select" width="156" height="104"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

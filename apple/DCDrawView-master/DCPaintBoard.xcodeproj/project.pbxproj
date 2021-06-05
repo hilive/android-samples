@@ -7,15 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1822BDA71CCFBB81005BEFED /* DCUndoBeziPathPaintBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1822BDA61CCFBB81005BEFED /* DCUndoBeziPathPaintBoard.m */; };
 		1824B25A1CCE71CF00EEB2C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824B2591CCE71CF00EEB2C6 /* main.m */; };
 		1824B25D1CCE71CF00EEB2C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824B25C1CCE71CF00EEB2C6 /* AppDelegate.m */; };
 		1824B2601CCE71CF00EEB2C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824B25F1CCE71CF00EEB2C6 /* ViewController.m */; };
 		1824B2631CCE71CF00EEB2C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2611CCE71CF00EEB2C6 /* Main.storyboard */; };
 		1824B2651CCE71CF00EEB2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2641CCE71CF00EEB2C6 /* Assets.xcassets */; };
 		1824B2681CCE71CF00EEB2C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2661CCE71CF00EEB2C6 /* LaunchScreen.storyboard */; };
-		1824B2771CCFA6C700EEB2C6 /* DCBezierPaintBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824B2761CCFA6C700EEB2C6 /* DCBezierPaintBoard.m */; };
-		1824B27A1CCFA6E200EEB2C6 /* DCBeizierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 1824B2791CCFA6E200EEB2C6 /* DCBeizierPath.m */; };
 		18F9431D1CD2642800240C0B /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9431C1CD2642800240C0B /* UIView+Frame.m */; };
 		18FCB85A1CD10662008E90E4 /* DCOpenGLDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8591CD10662008E90E4 /* DCOpenGLDrawView.m */; };
 		18FCB8651CD107D1008E90E4 /* point.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 18FCB85D1CD107D1008E90E4 /* point.fsh */; };
@@ -27,8 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1822BDA51CCFBB81005BEFED /* DCUndoBeziPathPaintBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCUndoBeziPathPaintBoard.h; sourceTree = "<group>"; };
-		1822BDA61CCFBB81005BEFED /* DCUndoBeziPathPaintBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUndoBeziPathPaintBoard.m; sourceTree = "<group>"; };
 		1824B2551CCE71CF00EEB2C6 /* DCPaintBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCPaintBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1824B2591CCE71CF00EEB2C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1824B25B1CCE71CF00EEB2C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -40,10 +35,6 @@
 		1824B2671CCE71CF00EEB2C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1824B2691CCE71CF00EEB2C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1824B2731CCE796700EEB2C6 /* DCCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCommon.h; sourceTree = "<group>"; };
-		1824B2751CCFA6C700EEB2C6 /* DCBezierPaintBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCBezierPaintBoard.h; sourceTree = "<group>"; };
-		1824B2761CCFA6C700EEB2C6 /* DCBezierPaintBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBezierPaintBoard.m; sourceTree = "<group>"; };
-		1824B2781CCFA6E200EEB2C6 /* DCBeizierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCBeizierPath.h; sourceTree = "<group>"; };
-		1824B2791CCFA6E200EEB2C6 /* DCBeizierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBeizierPath.m; sourceTree = "<group>"; };
 		18F9431B1CD2642800240C0B /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		18F9431C1CD2642800240C0B /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		18FCB8581CD10662008E90E4 /* DCOpenGLDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOpenGLDrawView.h; sourceTree = "<group>"; };
@@ -73,15 +64,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1822BDA41CCFBB61005BEFED /* UndoBezipath */ = {
-			isa = PBXGroup;
-			children = (
-				1822BDA51CCFBB81005BEFED /* DCUndoBeziPathPaintBoard.h */,
-				1822BDA61CCFBB81005BEFED /* DCUndoBeziPathPaintBoard.m */,
-			);
-			path = UndoBezipath;
-			sourceTree = "<group>";
-		};
 		1824B24C1CCE71CF00EEB2C6 = {
 			isa = PBXGroup;
 			children = (
@@ -129,21 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				18FCB8571CD1064E008E90E4 /* OpenGLPaint */,
-				1822BDA41CCFBB61005BEFED /* UndoBezipath */,
-				1824B2741CCFA6C700EEB2C6 /* BeziPathPaint */,
 			);
 			path = PaintBoard;
-			sourceTree = "<group>";
-		};
-		1824B2741CCFA6C700EEB2C6 /* BeziPathPaint */ = {
-			isa = PBXGroup;
-			children = (
-				1824B2751CCFA6C700EEB2C6 /* DCBezierPaintBoard.h */,
-				1824B2761CCFA6C700EEB2C6 /* DCBezierPaintBoard.m */,
-				1824B2781CCFA6E200EEB2C6 /* DCBeizierPath.h */,
-				1824B2791CCFA6E200EEB2C6 /* DCBeizierPath.m */,
-			);
-			path = BeziPathPaint;
 			sourceTree = "<group>";
 		};
 		18FCB8571CD1064E008E90E4 /* OpenGLPaint */ = {
@@ -258,16 +227,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1824B2601CCE71CF00EEB2C6 /* ViewController.m in Sources */,
-				1822BDA71CCFBB81005BEFED /* DCUndoBeziPathPaintBoard.m in Sources */,
 				1824B25D1CCE71CF00EEB2C6 /* AppDelegate.m in Sources */,
 				18FCB8671CD107D1008E90E4 /* fileUtil.m in Sources */,
-				1824B2771CCFA6C700EEB2C6 /* DCBezierPaintBoard.m in Sources */,
 				18FCB85A1CD10662008E90E4 /* DCOpenGLDrawView.m in Sources */,
 				1824B25A1CCE71CF00EEB2C6 /* main.m in Sources */,
 				18FCB8681CD107D1008E90E4 /* shaderUtil.c in Sources */,
 				18F9431D1CD2642800240C0B /* UIView+Frame.m in Sources */,
 				57591C8026342F89002A8236 /* TextureCapture.m in Sources */,
-				1824B27A1CCFA6E200EEB2C6 /* DCBeizierPath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
