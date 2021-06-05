@@ -7,11 +7,17 @@
 //
 
 #import "ViewController.h"
-#import "DCCommon.h"
-#import "DCOpenGLDrawView.h"
+#import "GlDrawView.h"
+
+typedef enum{
+    DCPaintColorRed = 1,
+    DCPaintColorGreen = 2,
+    DCPaintColorBlue = 3,
+    DCPaintColorBlack = 4
+} DCPaintColor;
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet DCOpenGLDrawView *openGlDrawView;
+@property (weak, nonatomic) IBOutlet GlDrawView *openGlDrawView;
 
 @property (weak, nonatomic) IBOutlet UIButton *selectColorBtn;
 @property (weak, nonatomic) IBOutlet UIView *colorView;
@@ -19,9 +25,6 @@
 
 @property (nonatomic, assign)DCPaintColor  selectPaintColor;
 @property (nonatomic, assign) BOOL isErase;
-
-
-@property (nonatomic, strong) UIColor *paintColor;
 
 @end
 
@@ -33,26 +36,27 @@
  */
 - (void)setSelectPaintColor:(DCPaintColor)selectPaintColor
 {
+  UIColor* paintColor = nil;
   _selectPaintColor = selectPaintColor;
   switch (selectPaintColor) {
     case DCPaintColorRed:
-      self.paintColor = [UIColor redColor];
+      paintColor = [UIColor redColor];
       break;
     case DCPaintColorBlue:
-      self.paintColor = [UIColor blueColor];
+      paintColor = [UIColor blueColor];
       break;
     case DCPaintColorGreen:
-      self.paintColor = [UIColor greenColor];
+      paintColor = [UIColor greenColor];
       break;
     case DCPaintColorBlack:
-      self.paintColor = [UIColor blackColor];
+      paintColor = [UIColor blackColor];
       break;
     default:
-      self.paintColor = [UIColor blackColor];
+      paintColor = [UIColor blackColor];
       break;
   }
   
-  self.openGlDrawView.lineColor = self.paintColor;
+  self.openGlDrawView.lineColor = paintColor;
 }
 
 - (void)setIsErase:(BOOL)isErase{
@@ -72,16 +76,13 @@
   [self.openGlDrawView clear];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   [self selectColorBtnClick:_selectColorBtn];
   self.selectPaintColor = DCPaintColorBlack;
   
   self.openGlDrawView.backgroundColor = [UIColor clearColor];
 }
-
 
 /**
  *  画笔颜色按钮

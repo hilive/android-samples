@@ -13,8 +13,7 @@
 		1824B2631CCE71CF00EEB2C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2611CCE71CF00EEB2C6 /* Main.storyboard */; };
 		1824B2651CCE71CF00EEB2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2641CCE71CF00EEB2C6 /* Assets.xcassets */; };
 		1824B2681CCE71CF00EEB2C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2661CCE71CF00EEB2C6 /* LaunchScreen.storyboard */; };
-		18F9431D1CD2642800240C0B /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F9431C1CD2642800240C0B /* UIView+Frame.m */; };
-		18FCB85A1CD10662008E90E4 /* DCOpenGLDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8591CD10662008E90E4 /* DCOpenGLDrawView.m */; };
+		18FCB85A1CD10662008E90E4 /* GlDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8591CD10662008E90E4 /* GlDrawView.m */; };
 		18FCB8651CD107D1008E90E4 /* point.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 18FCB85D1CD107D1008E90E4 /* point.fsh */; };
 		18FCB8661CD107D1008E90E4 /* point.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 18FCB85E1CD107D1008E90E4 /* point.vsh */; };
 		18FCB8671CD107D1008E90E4 /* fileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8621CD107D1008E90E4 /* fileUtil.m */; };
@@ -34,11 +33,8 @@
 		1824B2641CCE71CF00EEB2C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1824B2671CCE71CF00EEB2C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1824B2691CCE71CF00EEB2C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1824B2731CCE796700EEB2C6 /* DCCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCommon.h; sourceTree = "<group>"; };
-		18F9431B1CD2642800240C0B /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		18F9431C1CD2642800240C0B /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
-		18FCB8581CD10662008E90E4 /* DCOpenGLDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOpenGLDrawView.h; sourceTree = "<group>"; };
-		18FCB8591CD10662008E90E4 /* DCOpenGLDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCOpenGLDrawView.m; sourceTree = "<group>"; };
+		18FCB8581CD10662008E90E4 /* GlDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlDrawView.h; sourceTree = "<group>"; };
+		18FCB8591CD10662008E90E4 /* GlDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlDrawView.m; sourceTree = "<group>"; };
 		18FCB85B1CD107D1008E90E4 /* 说明.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "说明.h"; sourceTree = "<group>"; };
 		18FCB85D1CD107D1008E90E4 /* point.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = point.fsh; sourceTree = "<group>"; };
 		18FCB85E1CD107D1008E90E4 /* point.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = point.vsh; sourceTree = "<group>"; };
@@ -89,7 +85,6 @@
 				1824B25C1CCE71CF00EEB2C6 /* AppDelegate.m */,
 				1824B25E1CCE71CF00EEB2C6 /* ViewController.h */,
 				1824B25F1CCE71CF00EEB2C6 /* ViewController.m */,
-				1824B2731CCE796700EEB2C6 /* DCCommon.h */,
 				1824B2611CCE71CF00EEB2C6 /* Main.storyboard */,
 				1824B2641CCE71CF00EEB2C6 /* Assets.xcassets */,
 				1824B2661CCE71CF00EEB2C6 /* LaunchScreen.storyboard */,
@@ -121,10 +116,8 @@
 				18FCB85B1CD107D1008E90E4 /* 说明.h */,
 				57591C7E26342F89002A8236 /* TextureCapture.h */,
 				57591C7F26342F89002A8236 /* TextureCapture.m */,
-				18F9431B1CD2642800240C0B /* UIView+Frame.h */,
-				18F9431C1CD2642800240C0B /* UIView+Frame.m */,
-				18FCB8581CD10662008E90E4 /* DCOpenGLDrawView.h */,
-				18FCB8591CD10662008E90E4 /* DCOpenGLDrawView.m */,
+				18FCB8581CD10662008E90E4 /* GlDrawView.h */,
+				18FCB8591CD10662008E90E4 /* GlDrawView.m */,
 				18FCB85C1CD107D1008E90E4 /* Shaders */,
 				18FCB85F1CD107D1008E90E4 /* UtilSrc */,
 			);
@@ -229,10 +222,9 @@
 				1824B2601CCE71CF00EEB2C6 /* ViewController.m in Sources */,
 				1824B25D1CCE71CF00EEB2C6 /* AppDelegate.m in Sources */,
 				18FCB8671CD107D1008E90E4 /* fileUtil.m in Sources */,
-				18FCB85A1CD10662008E90E4 /* DCOpenGLDrawView.m in Sources */,
+				18FCB85A1CD10662008E90E4 /* GlDrawView.m in Sources */,
 				1824B25A1CCE71CF00EEB2C6 /* main.m in Sources */,
 				18FCB8681CD107D1008E90E4 /* shaderUtil.c in Sources */,
-				18F9431D1CD2642800240C0B /* UIView+Frame.m in Sources */,
 				57591C8026342F89002A8236 /* TextureCapture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

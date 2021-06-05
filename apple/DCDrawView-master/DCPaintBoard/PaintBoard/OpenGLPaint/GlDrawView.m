@@ -1,12 +1,12 @@
 //
-//  DCOpenGLDrawView.m
+//  GlDrawView.m
 //  DCPaintBoard
 //
 //  Created by Wade on 16/4/27.
 //  Copyright © 2016年 Wade. All rights reserved.
 //
 
-#import "DCOpenGLDrawView.h"
+#import "GlDrawView.h"
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
@@ -16,8 +16,6 @@
 #import "shaderUtil.h"
 #import "fileUtil.h"
 #import "debug.h"
-#import "DCCommon.h"
-#import "UIView+Frame.h"
 
 #define kBrushOpacity		(1.0 / 3.0)
 #define kBrushPixelStep		3
@@ -60,7 +58,7 @@ typedef struct {
   GLsizei width, height;
 } textureInfo_t;
 
-@interface DCOpenGLDrawView()
+@interface GlDrawView()
 {
   // The pixel dimensions of the backbuffer
   // 画布的大小
@@ -112,7 +110,7 @@ typedef struct {
 
 @end
 
-@implementation DCOpenGLDrawView
+@implementation GlDrawView
 
 - (void)setLineColor:(UIColor *)lineColor{
   _lineColor = lineColor;
@@ -589,7 +587,7 @@ typedef struct {
   // 转换触点从UIView引用到OpenGL 1(倒翻转)
   // Convert touch point from UIView referential to OpenGL one (upside-down flip)
   _previousLocation = [touch locationInView:self];
-  _previousLocation.y = self.height - _previousLocation.y;
+  _previousLocation.y = self.frame.size.height - _previousLocation.y;
   
   CGPoint currentPoint = [touch locationInView:self];
   NSDictionary *dict = @{@"x":@(currentPoint.x),@"y":@(currentPoint.y)};
@@ -605,9 +603,9 @@ typedef struct {
   UITouch* touch = [[event touchesForView:self] anyObject];
   
   _location = [touch locationInView:self];
-  _location.y = self.height - _location.y;
+  _location.y = self.frame.size.height - _location.y;
   _previousLocation = [touch previousLocationInView:self];
-  _previousLocation.y = self.height - _previousLocation.y;
+  _previousLocation.y = self.frame.size.height - _previousLocation.y;
   
   [self renderLineFromPoint:_previousLocation toPoint:_location];
   
@@ -621,10 +619,10 @@ typedef struct {
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
   UITouch*  touch = [[event touchesForView:self] anyObject];
   _location = [touch locationInView:self];
-  _location.y = self.height - _location.y;
+  _location.y = self.frame.size.height - _location.y;
   
   _previousLocation = [touch previousLocationInView:self];
-  _previousLocation.y = self.height - _previousLocation.y;
+  _previousLocation.y = self.frame.size.height - _previousLocation.y;
   
   [self renderLineFromPoint:_previousLocation toPoint:_location];
   

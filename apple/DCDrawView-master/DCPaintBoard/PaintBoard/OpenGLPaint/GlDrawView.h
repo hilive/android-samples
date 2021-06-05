@@ -1,5 +1,5 @@
 //
-//  DCOpenGLDrawView.h
+//  GlDrawView.h
 //  DCPaintBoard
 //
 //  Created by Wade on 16/4/27.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DCOpenGLDrawView : UIView
+@interface GlDrawView : UIView
 /**
  *  画线的颜色
  */
