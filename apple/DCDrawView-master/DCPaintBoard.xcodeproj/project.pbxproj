@@ -20,6 +20,9 @@
 		18FCB8681CD107D1008E90E4 /* shaderUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8631CD107D1008E90E4 /* shaderUtil.c */; };
 		18FCB86A1CD10800008E90E4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FCB8691CD10800008E90E4 /* OpenGLES.framework */; };
 		57591C8026342F89002A8236 /* TextureCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 57591C7F26342F89002A8236 /* TextureCapture.m */; };
+		57A7E6F3266B946C00FE38D3 /* GLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7E6ED266B946C00FE38D3 /* GLContext.m */; };
+		57A7E6F4266B946C00FE38D3 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7E6F0266B946C00FE38D3 /* GLProgram.m */; };
+		57A7E6F5266B946C00FE38D3 /* GLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7E6F2266B946C00FE38D3 /* GLTexture.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,13 @@
 		18FCB8691CD10800008E90E4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		57591C7E26342F89002A8236 /* TextureCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureCapture.h; sourceTree = "<group>"; };
 		57591C7F26342F89002A8236 /* TextureCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureCapture.m; sourceTree = "<group>"; };
+		57A7E6EC266B946C00FE38D3 /* GLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLContext.h; sourceTree = "<group>"; };
+		57A7E6ED266B946C00FE38D3 /* GLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLContext.m; sourceTree = "<group>"; };
+		57A7E6EE266B946C00FE38D3 /* GLDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLDefine.h; sourceTree = "<group>"; };
+		57A7E6EF266B946C00FE38D3 /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
+		57A7E6F0266B946C00FE38D3 /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
+		57A7E6F1266B946C00FE38D3 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
+		57A7E6F2266B946C00FE38D3 /* GLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTexture.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +90,7 @@
 		1824B2571CCE71CF00EEB2C6 /* DCPaintBoard */ = {
 			isa = PBXGroup;
 			children = (
+				57A7E6EB266B946C00FE38D3 /* common */,
 				18FCB85B1CD107D1008E90E4 /* 说明.h */,
 				57591C7E26342F89002A8236 /* TextureCapture.h */,
 				57591C7F26342F89002A8236 /* TextureCapture.m */,
@@ -127,6 +138,20 @@
 				18FCB8641CD107D1008E90E4 /* shaderUtil.h */,
 			);
 			path = UtilSrc;
+			sourceTree = "<group>";
+		};
+		57A7E6EB266B946C00FE38D3 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				57A7E6EC266B946C00FE38D3 /* GLContext.h */,
+				57A7E6ED266B946C00FE38D3 /* GLContext.m */,
+				57A7E6EE266B946C00FE38D3 /* GLDefine.h */,
+				57A7E6EF266B946C00FE38D3 /* GLProgram.h */,
+				57A7E6F0266B946C00FE38D3 /* GLProgram.m */,
+				57A7E6F1266B946C00FE38D3 /* GLTexture.h */,
+				57A7E6F2266B946C00FE38D3 /* GLTexture.m */,
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,8 +232,11 @@
 				1824B25D1CCE71CF00EEB2C6 /* AppDelegate.m in Sources */,
 				18FCB8671CD107D1008E90E4 /* fileUtil.m in Sources */,
 				18FCB85A1CD10662008E90E4 /* GlDrawView.m in Sources */,
+				57A7E6F5266B946C00FE38D3 /* GLTexture.m in Sources */,
 				1824B25A1CCE71CF00EEB2C6 /* main.m in Sources */,
+				57A7E6F4266B946C00FE38D3 /* GLProgram.m in Sources */,
 				18FCB8681CD107D1008E90E4 /* shaderUtil.c in Sources */,
+				57A7E6F3266B946C00FE38D3 /* GLContext.m in Sources */,
 				57591C8026342F89002A8236 /* TextureCapture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
