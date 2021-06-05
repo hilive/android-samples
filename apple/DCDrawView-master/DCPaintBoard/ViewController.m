@@ -14,13 +14,11 @@
 @property (weak, nonatomic) IBOutlet DCOpenGLDrawView *openGlDrawView;
 
 @property (weak, nonatomic) IBOutlet UIButton *selectColorBtn;
-@property (weak, nonatomic) IBOutlet UIButton *openGLBtn;
 @property (weak, nonatomic) IBOutlet UIView *colorView;
 @property (weak, nonatomic) IBOutlet UIButton *eraseBtn;
 
 @property (nonatomic, assign)DCPaintColor  selectPaintColor;
 @property (nonatomic, assign) BOOL isErase;
-@property (nonatomic, assign) DCPaintBoardType paintBoardType;
 
 
 @property (nonatomic, strong) UIColor *paintColor;
@@ -57,11 +55,6 @@
   self.openGlDrawView.lineColor = self.paintColor;
 }
 
-- (void)setPaintBoardType:(DCPaintBoardType)paintBoardType {
-  _paintBoardType = paintBoardType;
-  self.openGlDrawView.hidden = NO;
-}
-
 - (void)setIsErase:(BOOL)isErase{
   _isErase = isErase;
   self.openGlDrawView.isErase = isErase;
@@ -83,7 +76,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self selectPaintBoardBtnClcik:self.openGLBtn];
   [self selectColorBtnClick:_selectColorBtn];
   self.selectPaintColor = DCPaintColorBlack;
   
@@ -149,20 +141,6 @@
 - (IBAction)eraseBtnClick:(UIButton *)sender {
   sender.selected = !sender.selected;
   self.isErase = sender.selected;
-}
-
-
-/**
- *  点击选中的是那一种画板
- *
- *  @param sender 画板种类按钮
- */
-- (IBAction)selectPaintBoardBtnClcik:(UIButton *)sender {
-  if (!sender.selected) {
-    self.paintBoardType = (DCPaintBoardType)sender.tag;
-    self.openGLBtn.selected = YES;
-  }
-  
 }
 
 @end

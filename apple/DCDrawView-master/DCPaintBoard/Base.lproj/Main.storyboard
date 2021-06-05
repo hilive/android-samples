@@ -23,7 +23,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-WX-bgl" userLabel="ContentView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVC-JD-C7a" userLabel="openGL" customClass="DCOpenGLDrawView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVC-JD-C7a" userLabel="openGL" customClass="DCOpenGLDrawView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="826"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="openGL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEm-Yu-Q3E" userLabel="opengl">
@@ -68,31 +68,15 @@
                                                     <action selector="eraseBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XcO-Uu-SYy"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3j-kc-MG2">
-                                                <rect key="frame" x="180" y="0.0" width="80" height="70"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="Pgc-a2-yfT"/>
-                                                </constraints>
-                                                <state key="normal" title="OpenGL" backgroundImage="nomal">
-                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <state key="selected" backgroundImage="select"/>
-                                                <connections>
-                                                    <action selector="selectPaintBoardBtnClcik:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxs-ms-yOQ"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="G3j-kc-MG2" secondAttribute="bottom" id="04G-gg-X7G"/>
-                                            <constraint firstItem="WJJ-S5-cCE" firstAttribute="leading" secondItem="G3j-kc-MG2" secondAttribute="trailing" constant="74" id="0Kl-zf-0aE"/>
                                             <constraint firstAttribute="bottom" secondItem="WJJ-S5-cCE" secondAttribute="bottom" id="3eT-VT-zvz"/>
                                             <constraint firstItem="WJJ-S5-cCE" firstAttribute="leading" secondItem="JM6-wr-XpH" secondAttribute="leading" id="Bed-yQ-5Af"/>
                                             <constraint firstAttribute="height" constant="70" id="CPO-Hm-FAY"/>
                                             <constraint firstItem="kJh-uY-i2x" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="Las-eX-2Ji"/>
                                             <constraint firstItem="WJJ-S5-cCE" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="NW5-uR-zJe"/>
                                             <constraint firstAttribute="trailing" secondItem="WJJ-S5-cCE" secondAttribute="trailing" id="YiI-s0-CfW"/>
-                                            <constraint firstItem="G3j-kc-MG2" firstAttribute="top" secondItem="JM6-wr-XpH" secondAttribute="top" id="biY-S3-sbN"/>
                                             <constraint firstAttribute="bottom" secondItem="kJh-uY-i2x" secondAttribute="bottom" id="lO9-rW-EmB"/>
                                             <constraint firstItem="WJJ-S5-cCE" firstAttribute="leading" secondItem="kJh-uY-i2x" secondAttribute="trailing" constant="10" id="v3H-ME-ho1"/>
                                         </constraints>
@@ -201,14 +185,13 @@
                     <connections>
                         <outlet property="colorView" destination="bUT-nw-z0U" id="weS-G4-UHk"/>
                         <outlet property="eraseBtn" destination="kJh-uY-i2x" id="6HW-jX-ZB6"/>
-                        <outlet property="openGLBtn" destination="G3j-kc-MG2" id="qzB-7E-O4Q"/>
                         <outlet property="openGlDrawView" destination="BVC-JD-C7a" id="9is-88-iJA"/>
                         <outlet property="selectColorBtn" destination="WJJ-S5-cCE" id="PnH-7g-1Mi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="335" y="367"/>
+            <point key="canvasLocation" x="334.78260869565219" y="366.96428571428572"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -220,9 +203,7 @@
         <image name="btn_mark_black" width="80" height="70"/>
         <image name="down" width="29" height="21"/>
         <image name="green" width="28" height="28"/>
-        <image name="nomal" width="150" height="86"/>
         <image name="red" width="28" height="28"/>
-        <image name="select" width="156" height="104"/>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

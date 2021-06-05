@@ -16,13 +16,6 @@ typedef enum{
     DCPaintColorBlack = 4
 } DCPaintColor;
 
-
-typedef enum{
-    DCPaintBoardTypeBezi = 1,
-    DCPaintBoardTypeBeziUndo = 2,
-    DCPaintBoardTypeOpenGL = 3
-} DCPaintBoardType;
-
 static NSInteger const kLineWidth = 5;
 static NSInteger const kEraseLineWidth = 20;
 #endif /* DCCommon_h */
