@@ -13,7 +13,7 @@
 		1824B2631CCE71CF00EEB2C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2611CCE71CF00EEB2C6 /* Main.storyboard */; };
 		1824B2651CCE71CF00EEB2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2641CCE71CF00EEB2C6 /* Assets.xcassets */; };
 		1824B2681CCE71CF00EEB2C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1824B2661CCE71CF00EEB2C6 /* LaunchScreen.storyboard */; };
-		18FCB85A1CD10662008E90E4 /* GlDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8591CD10662008E90E4 /* GlDrawView.m */; };
+		18FCB85A1CD10662008E90E4 /* DrawBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8591CD10662008E90E4 /* DrawBoardView.m */; };
 		18FCB8651CD107D1008E90E4 /* point.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 18FCB85D1CD107D1008E90E4 /* point.fsh */; };
 		18FCB8661CD107D1008E90E4 /* point.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 18FCB85E1CD107D1008E90E4 /* point.vsh */; };
 		18FCB8671CD107D1008E90E4 /* fileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCB8621CD107D1008E90E4 /* fileUtil.m */; };
@@ -23,6 +23,7 @@
 		57A7E6F3266B946C00FE38D3 /* GLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7E6ED266B946C00FE38D3 /* GLContext.m */; };
 		57A7E6F4266B946C00FE38D3 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7E6F0266B946C00FE38D3 /* GLProgram.m */; };
 		57A7E6F5266B946C00FE38D3 /* GLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7E6F2266B946C00FE38D3 /* GLTexture.m */; };
+		57A7E6F8266B9AD600FE38D3 /* DrawBoardCtx.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A7E6F7266B9AD600FE38D3 /* DrawBoardCtx.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +37,8 @@
 		1824B2641CCE71CF00EEB2C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1824B2671CCE71CF00EEB2C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1824B2691CCE71CF00EEB2C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18FCB8581CD10662008E90E4 /* GlDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlDrawView.h; sourceTree = "<group>"; };
-		18FCB8591CD10662008E90E4 /* GlDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlDrawView.m; sourceTree = "<group>"; };
+		18FCB8581CD10662008E90E4 /* DrawBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBoardView.h; sourceTree = "<group>"; };
+		18FCB8591CD10662008E90E4 /* DrawBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawBoardView.m; sourceTree = "<group>"; };
 		18FCB85B1CD107D1008E90E4 /* 说明.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "说明.h"; sourceTree = "<group>"; };
 		18FCB85D1CD107D1008E90E4 /* point.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = point.fsh; sourceTree = "<group>"; };
 		18FCB85E1CD107D1008E90E4 /* point.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = point.vsh; sourceTree = "<group>"; };
@@ -56,6 +57,8 @@
 		57A7E6F0266B946C00FE38D3 /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
 		57A7E6F1266B946C00FE38D3 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
 		57A7E6F2266B946C00FE38D3 /* GLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTexture.m; sourceTree = "<group>"; };
+		57A7E6F6266B9AC200FE38D3 /* DrawBoardCtx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawBoardCtx.h; sourceTree = "<group>"; };
+		57A7E6F7266B9AD600FE38D3 /* DrawBoardCtx.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawBoardCtx.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +97,10 @@
 				18FCB85B1CD107D1008E90E4 /* 说明.h */,
 				57591C7E26342F89002A8236 /* TextureCapture.h */,
 				57591C7F26342F89002A8236 /* TextureCapture.m */,
-				18FCB8581CD10662008E90E4 /* GlDrawView.h */,
-				18FCB8591CD10662008E90E4 /* GlDrawView.m */,
+				18FCB8581CD10662008E90E4 /* DrawBoardView.h */,
+				18FCB8591CD10662008E90E4 /* DrawBoardView.m */,
+				57A7E6F6266B9AC200FE38D3 /* DrawBoardCtx.h */,
+				57A7E6F7266B9AD600FE38D3 /* DrawBoardCtx.m */,
 				18FCB85C1CD107D1008E90E4 /* Shaders */,
 				18FCB85F1CD107D1008E90E4 /* UtilSrc */,
 				1824B25B1CCE71CF00EEB2C6 /* AppDelegate.h */,
@@ -143,9 +148,9 @@
 		57A7E6EB266B946C00FE38D3 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				57A7E6EE266B946C00FE38D3 /* GLDefine.h */,
 				57A7E6EC266B946C00FE38D3 /* GLContext.h */,
 				57A7E6ED266B946C00FE38D3 /* GLContext.m */,
-				57A7E6EE266B946C00FE38D3 /* GLDefine.h */,
 				57A7E6EF266B946C00FE38D3 /* GLProgram.h */,
 				57A7E6F0266B946C00FE38D3 /* GLProgram.m */,
 				57A7E6F1266B946C00FE38D3 /* GLTexture.h */,
@@ -231,11 +236,12 @@
 				1824B2601CCE71CF00EEB2C6 /* ViewController.m in Sources */,
 				1824B25D1CCE71CF00EEB2C6 /* AppDelegate.m in Sources */,
 				18FCB8671CD107D1008E90E4 /* fileUtil.m in Sources */,
-				18FCB85A1CD10662008E90E4 /* GlDrawView.m in Sources */,
+				18FCB85A1CD10662008E90E4 /* DrawBoardView.m in Sources */,
 				57A7E6F5266B946C00FE38D3 /* GLTexture.m in Sources */,
 				1824B25A1CCE71CF00EEB2C6 /* main.m in Sources */,
 				57A7E6F4266B946C00FE38D3 /* GLProgram.m in Sources */,
 				18FCB8681CD107D1008E90E4 /* shaderUtil.c in Sources */,
+				57A7E6F8266B9AD600FE38D3 /* DrawBoardCtx.m in Sources */,
 				57A7E6F3266B946C00FE38D3 /* GLContext.m in Sources */,
 				57591C8026342F89002A8236 /* TextureCapture.m in Sources */,
 			);

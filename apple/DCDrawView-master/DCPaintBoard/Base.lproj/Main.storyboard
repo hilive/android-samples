@@ -23,7 +23,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-WX-bgl" userLabel="ContentView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVC-JD-C7a" userLabel="openGL" customClass="GlDrawView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVC-JD-C7a" userLabel="openGL" customClass="DrawBoardView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="826"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -169,7 +169,7 @@
                     <connections>
                         <outlet property="colorView" destination="bUT-nw-z0U" id="weS-G4-UHk"/>
                         <outlet property="eraseBtn" destination="kJh-uY-i2x" id="6HW-jX-ZB6"/>
-                        <outlet property="openGlDrawView" destination="BVC-JD-C7a" id="9is-88-iJA"/>
+                        <outlet property="openDrawBoardView" destination="BVC-JD-C7a" id="9is-88-iJA"/>
                         <outlet property="selectColorBtn" destination="WJJ-S5-cCE" id="PnH-7g-1Mi"/>
                     </connections>
                 </viewController>

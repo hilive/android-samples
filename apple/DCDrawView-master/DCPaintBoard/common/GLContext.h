@@ -10,8 +10,9 @@
 #import "GLDefine.h"
 
 @interface GLContext : NSObject
+@property (nonatomic, nullable, readonly) EAGLContext* glContext;
 @property (nonatomic, nullable, readonly) CVOpenGLESTextureCacheRef textureCache;
-- (id)initWithShare:(nullable EAGLSharegroup*)group;
+- (_Nonnull id)initWithShare:(nullable EAGLSharegroup*)group;
 -(void)join;
 -(void)leave;
 @end

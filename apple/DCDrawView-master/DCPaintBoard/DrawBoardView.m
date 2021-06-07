@@ -1,12 +1,12 @@
 //
-//  GlDrawView.m
+//  DrawBoardView.m
 //  DCPaintBoard
 //
 //  Created by Wade on 16/4/27.
 //  Copyright © 2016年 Wade. All rights reserved.
 //
 
-#import "GlDrawView.h"
+#import "DrawBoardView.h"
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
@@ -58,7 +58,7 @@ typedef struct {
   GLsizei width, height;
 } textureInfo_t;
 
-@interface GlDrawView()
+@interface DrawBoardView()
 {
   // The pixel dimensions of the backbuffer
   // 画布的大小
@@ -110,7 +110,7 @@ typedef struct {
 
 @end
 
-@implementation GlDrawView
+@implementation DrawBoardView
 
 - (void)setLineColor:(UIColor *)lineColor{
   _lineColor = lineColor;

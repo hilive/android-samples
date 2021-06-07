@@ -13,6 +13,7 @@
   CVOpenGLESTextureCacheRef   _textureCache;
 }
 
+@synthesize glContext = _currContext;
 @synthesize textureCache;
 
 - (id)init {

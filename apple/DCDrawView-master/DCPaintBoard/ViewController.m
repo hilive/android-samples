@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "GlDrawView.h"
+#import "DrawBoardView.h"
 
 typedef enum{
     DCPaintColorRed = 1,
@@ -17,7 +17,7 @@ typedef enum{
 } DCPaintColor;
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet GlDrawView *openGlDrawView;
+@property (weak, nonatomic) IBOutlet DrawBoardView *openDrawBoardView;
 
 @property (weak, nonatomic) IBOutlet UIButton *selectColorBtn;
 @property (weak, nonatomic) IBOutlet UIView *colorView;
@@ -56,12 +56,12 @@ typedef enum{
       break;
   }
   
-  self.openGlDrawView.lineColor = paintColor;
+  self.openDrawBoardView.lineColor = paintColor;
 }
 
 - (void)setIsErase:(BOOL)isErase{
   _isErase = isErase;
-  self.openGlDrawView.isErase = isErase;
+  self.openDrawBoardView.isErase = isErase;
 }
 
 - (void)viewDidLoad {
@@ -73,7 +73,7 @@ typedef enum{
 }
 
 - (void)longpresseraseBtn:(UILongPressGestureRecognizer *)gest{
-  [self.openGlDrawView clear];
+  [self.openDrawBoardView clear];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -81,7 +81,7 @@ typedef enum{
   [self selectColorBtnClick:_selectColorBtn];
   self.selectPaintColor = DCPaintColorBlack;
   
-  self.openGlDrawView.backgroundColor = [UIColor clearColor];
+  self.openDrawBoardView.backgroundColor = [UIColor clearColor];
 }
 
 /**
